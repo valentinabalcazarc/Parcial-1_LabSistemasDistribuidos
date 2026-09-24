@@ -71,7 +71,7 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 
 // BuscarAudio recorre el vector buscando un audio por su título. Retorna el
 // audio encontrado y un booleano que indica si la búsqueda tuvo éxito.
-func (this *MetadataAudiolibroRepository) BuscarAudio(id int) (entity.MetaDataAudiolibro, bool) {
+func (this *MetadataAudiolibroRepository) BuscarAudiolibro(id int) (entity.MetaDataAudiolibro, bool) {
 	for _, audio := range this.vectorMetadataAudiolibros {
 		if audio.GetId() == id {
 			return audio, true

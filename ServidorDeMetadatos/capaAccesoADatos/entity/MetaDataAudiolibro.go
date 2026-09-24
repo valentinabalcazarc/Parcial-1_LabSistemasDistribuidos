@@ -43,7 +43,7 @@ func (a *MetaDataAudiolibro) GetISBN() int {
 	return a.isbn
 }
 
-func (a *MetaDataAudiolibro) Capitulo() int {
+func (a *MetaDataAudiolibro) GetCapitulo() int {
 	return a.capitulo
 }
 

@@ -65,9 +65,9 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	}
 }
 
-// BuscarAudio recorre el vector buscando un podcast por su ID. Retorna el
+// BuscarPodcast recorre el vector buscando un podcast por su ID. Retorna el
 // podcast encontrado y un booleano que indica si la búsqueda tuvo éxito.
-func (this *MetadataPodcastRepository) BuscarAudio(id int) (entity.MetaDataPodcast, bool) {
+func (this *MetadataPodcastRepository) BuscarPodcast(id int) (entity.MetaDataPodcast, bool) {
 	for _, podcast := range this.vectorMetadataPodcasts {
 		if podcast.GetId() == id {
 			return podcast, true

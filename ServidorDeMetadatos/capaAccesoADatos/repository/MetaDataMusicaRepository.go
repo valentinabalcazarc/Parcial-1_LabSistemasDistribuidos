@@ -70,9 +70,9 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	}
 }
 
-// BuscarAudio recorre el vector buscando una canción por su ID. Retorna la
+// BuscarMusica recorre el vector buscando una canción por su ID. Retorna la
 // canción encontrada y un booleano que indica si la búsqueda tuvo éxito.
-func (this *MetadataMusicaRepository) BuscarAudio(id int) (entity.MetaDataMusica, bool) {
+func (this *MetadataMusicaRepository) BuscarMusica(id int) (entity.MetaDataMusica, bool) {
 	for _, musica := range this.vectorMetadataMusica {
 		if musica.GetId() == id {
 			return musica, true

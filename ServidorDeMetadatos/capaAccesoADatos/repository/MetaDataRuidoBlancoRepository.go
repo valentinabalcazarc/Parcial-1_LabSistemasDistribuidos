@@ -69,8 +69,8 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	}
 }
 
-// BuscarAudio recorre el vector buscando un registro de ruido blanco por su ID.
-func (this *MetadataRuidoBlancoRepository) BuscarAudio(id int) (entity.MetaDataRuidoBlanco, bool) {
+// BuscarRuidoBlanco recorre el vector buscando un registro de ruido blanco por su ID.
+func (this *MetadataRuidoBlancoRepository) BuscarRuidoBlanco(id int) (entity.MetaDataRuidoBlanco, bool) {
 	for _, ruido := range this.vectorMetadataRuidoBlanco {
 		if ruido.GetId() == id {
 			return ruido, true
