@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MetaDataRuidoBlanco struct {
 	id                  int
-	tipo                string
+	tipo                TipoAudio
 	tipoSonido          string
 	fuenteAudio         string
 	usoSugerido         string
@@ -19,7 +19,7 @@ func (r *MetaDataRuidoBlanco) GetId() int {
 	return r.id
 }
 
-func (r *MetaDataRuidoBlanco) GetTipo() string {
+func (r *MetaDataRuidoBlanco) GetTipo() TipoAudio {
 	return r.tipo
 }
 
@@ -53,7 +53,7 @@ func (r *MetaDataRuidoBlanco) SetId(id int) {
 	r.id = id
 }
 
-func (r *MetaDataRuidoBlanco) SetTipo(tipo string) {
+func (r *MetaDataRuidoBlanco) SetTipo(tipo TipoAudio) {
 	r.tipo = tipo
 }
 
@@ -85,14 +85,14 @@ func (r *MetaDataRuidoBlanco) SetFrecuenciaDominante(frecuenciaDominante string)
 
 func (r MetaDataRuidoBlanco) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		ID                  int    `json:"id"`
-		Tipo                string `json:"tipo"`
-		TipoSonido          string `json:"tipo_sonido"`
-		FuenteAudio         string `json:"fuente_audio"`
-		UsoSugerido         string `json:"uso_sugerido"`
-		Proveedor           string `json:"proveedor"`
-		Duracion            int    `json:"duracion"`
-		FrecuenciaDominante string `json:"frecuencia_dominante"`
+		ID                  int       `json:"id"`
+		Tipo                TipoAudio `json:"tipo"`
+		TipoSonido          string    `json:"tipo_sonido"`
+		FuenteAudio         string    `json:"fuente_audio"`
+		UsoSugerido         string    `json:"uso_sugerido"`
+		Proveedor           string    `json:"proveedor"`
+		Duracion            int       `json:"duracion"`
+		FrecuenciaDominante string    `json:"frecuencia_dominante"`
 	}{
 		ID:                  r.id,
 		Tipo:                r.tipo,
@@ -107,14 +107,14 @@ func (r MetaDataRuidoBlanco) MarshalJSON() ([]byte, error) {
 
 func (r *MetaDataRuidoBlanco) UnmarshalJSON(data []byte) error {
 	aux := struct {
-		ID                  int    `json:"id"`
-		Tipo                string `json:"tipo"`
-		TipoSonido          string `json:"tipo_sonido"`
-		FuenteAudio         string `json:"fuente_audio"`
-		UsoSugerido         string `json:"uso_sugerido"`
-		Proveedor           string `json:"proveedor"`
-		Duracion            int    `json:"duracion"`
-		FrecuenciaDominante string `json:"frecuencia_dominante"`
+		ID                  int       `json:"id"`
+		Tipo                TipoAudio `json:"tipo"`
+		TipoSonido          string    `json:"tipo_sonido"`
+		FuenteAudio         string    `json:"fuente_audio"`
+		UsoSugerido         string    `json:"uso_sugerido"`
+		Proveedor           string    `json:"proveedor"`
+		Duracion            int       `json:"duracion"`
+		FrecuenciaDominante string    `json:"frecuencia_dominante"`
 	}{}
 
 	if err := json.Unmarshal(data, &aux); err != nil {

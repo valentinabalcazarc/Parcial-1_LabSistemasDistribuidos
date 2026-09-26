@@ -44,3 +44,28 @@ func (this *MetadataRuidoBlancoService) ConsultarRuidoBlanco(id int) dto.Respues
 	}
 	return respuesta
 }
+
+func (this *MetadataRuidoBlancoService) ListarRuidoBlanco() dto.RespuestaListaRuidoBlancoDTO {
+	lista := this.repository.ListarRuidoBlanco()
+	var dtos []dto.MetadataRuidoBlancoDTO
+
+	for _, ruidoBlanco := range lista {
+		var d dto.MetadataRuidoBlancoDTO
+		d.ID = ruidoBlanco.GetId()
+		d.Tipo = ruidoBlanco.GetTipo()
+		d.TipoSonido = ruidoBlanco.GetTipoSonido()
+		d.FuenteAudio = ruidoBlanco.GetFuenteAudio()
+		d.UsoSugerido = ruidoBlanco.GetUsoSugerido()
+		d.Proveedor = ruidoBlanco.GetProveedor()
+		d.Duracion = ruidoBlanco.GetDuracion()
+		d.FrecuenciaDominante = ruidoBlanco.GetFrecuenciaDominante()
+
+		dtos = append(dtos, d)
+	}
+
+	return dto.RespuestaListaRuidoBlancoDTO{
+		RuidosBlancos: dtos,
+		Codigo:        200,
+		Mensaje:       "Lista de ruido blanco obtenida correctamente",
+	}
+}

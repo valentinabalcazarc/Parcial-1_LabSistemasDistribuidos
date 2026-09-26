@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MetaDataPodcast struct {
 	id                     int
-	tipo                   string
+	tipo                   TipoAudio
 	nombre                 string
 	tituloEpisodio         string
 	numeroTemporada        int
@@ -18,7 +18,7 @@ func (p *MetaDataPodcast) GetId() int {
 	return p.id
 }
 
-func (p *MetaDataPodcast) GetTipo() string {
+func (p *MetaDataPodcast) GetTipo() TipoAudio {
 	return p.tipo
 }
 
@@ -48,7 +48,7 @@ func (p *MetaDataPodcast) SetId(id int) {
 	p.id = id
 }
 
-func (p *MetaDataPodcast) SetTipo(tipo string) {
+func (p *MetaDataPodcast) SetTipo(tipo TipoAudio) {
 	p.tipo = tipo
 }
 
@@ -76,13 +76,13 @@ func (p *MetaDataPodcast) SetClasificacionContenido(clasificacionContenido strin
 
 func (p MetaDataPodcast) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		ID                     int    `json:"id"`
-		Tipo                   string `json:"tipo"`
-		Nombre                 string `json:"nombre"`
-		TituloEpisodio         string `json:"titulo_episodio"`
-		NumeroTemporada        int    `json:"numero_temporada"`
-		NotasShow              string `json:"notas_show"`
-		ClasificacionContenido string `json:"clasificacion_contenido"`
+		ID                     int       `json:"id"`
+		Tipo                   TipoAudio `json:"tipo"`
+		Nombre                 string    `json:"nombre"`
+		TituloEpisodio         string    `json:"titulo_episodio"`
+		NumeroTemporada        int       `json:"numero_temporada"`
+		NotasShow              string    `json:"notas_show"`
+		ClasificacionContenido string    `json:"clasificacion_contenido"`
 	}{
 		ID:                     p.id,
 		Tipo:                   p.tipo,
@@ -96,13 +96,13 @@ func (p MetaDataPodcast) MarshalJSON() ([]byte, error) {
 
 func (p *MetaDataPodcast) UnmarshalJSON(data []byte) error {
 	aux := struct {
-		ID                     int    `json:"id"`
-		Tipo                   string `json:"tipo"`
-		Nombre                 string `json:"nombre"`
-		TituloEpisodio         string `json:"titulo_episodio"`
-		NumeroTemporada        int    `json:"numero_temporada"`
-		NotasShow              string `json:"notas_show"`
-		ClasificacionContenido string `json:"clasificacion_contenido"`
+		ID                     int       `json:"id"`
+		Tipo                   TipoAudio `json:"tipo"`
+		Nombre                 string    `json:"nombre"`
+		TituloEpisodio         string    `json:"titulo_episodio"`
+		NumeroTemporada        int       `json:"numero_temporada"`
+		NotasShow              string    `json:"notas_show"`
+		ClasificacionContenido string    `json:"clasificacion_contenido"`
 	}{}
 
 	if err := json.Unmarshal(data, &aux); err != nil {

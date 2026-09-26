@@ -44,3 +44,28 @@ func (this *MetadataAudiolibroService) ConsultarAudiolibro(id int) dto.Respuesta
 	}
 	return respuesta
 }
+
+func (this *MetadataAudiolibroService) ListarAudiolibros() dto.RespuestaListaAudiolibroDTO {
+	lista := this.repository.ListarAudiolibros()
+	var dtos []dto.MetadataAudiolibroDTO
+
+	for _, audiolibro := range lista {
+		var d dto.MetadataAudiolibroDTO
+		d.ID = audiolibro.GetId()
+		d.Tipo = audiolibro.GetTipo()
+		d.TituloLibro = audiolibro.GetTituloLibro()
+		d.Autor = audiolibro.GetAutor()
+		d.Narrador = audiolibro.GetNarrador()
+		d.Editorial = audiolibro.GetEditorial()
+		d.ISBN = audiolibro.GetISBN()
+		d.Capitulo = audiolibro.GetCapitulo()
+
+		dtos = append(dtos, d)
+	}
+
+	return dto.RespuestaListaAudiolibroDTO{
+		Audiolibros: dtos,
+		Codigo:      200,
+		Mensaje:     "Lista de audiolibros obtenida correctamente",
+	}
+}

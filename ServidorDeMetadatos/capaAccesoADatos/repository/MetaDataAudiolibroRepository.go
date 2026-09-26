@@ -20,9 +20,11 @@ func NewMetadataAudiolibroRepository() *MetadataAudiolibroRepository {
 func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 	var objAudio1, objAudio2, objAudio3, objAudio4 entity.MetaDataAudiolibro
 
+	tipoAudiolibro := entity.NewTipoAudio(4, "Audiolibro")
+
 	// Audiolibro 1
 	objAudio1.SetId(1)
-	objAudio1.SetTipo("Audiolibro")
+	objAudio1.SetTipo(tipoAudiolibro)
 	objAudio1.SetTituloLibro("Cien Años de Soledad")
 	objAudio1.SetAutor("Gabriel García Márquez")
 	objAudio1.SetNarrador("Gustavo Bonfigli")
@@ -32,7 +34,7 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 
 	// Audiolibro 2
 	objAudio2.SetId(2)
-	objAudio2.SetTipo("Audiolibro")
+	objAudio2.SetTipo(tipoAudiolibro)
 	objAudio2.SetTituloLibro("El Principito")
 	objAudio2.SetAutor("Antoine de Saint-Exupéry")
 	objAudio2.SetNarrador("José María Carrascal")
@@ -42,7 +44,7 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 
 	// Audiolibro 3
 	objAudio3.SetId(3)
-	objAudio3.SetTipo("Audiolibro")
+	objAudio3.SetTipo(tipoAudiolibro)
 	objAudio3.SetTituloLibro("1984")
 	objAudio3.SetAutor("George Orwell")
 	objAudio3.SetNarrador("Raúl Llorens")
@@ -52,7 +54,7 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 
 	// Audiolibro 4
 	objAudio4.SetId(4)
-	objAudio4.SetTipo("Audiolibro")
+	objAudio4.SetTipo(tipoAudiolibro)
 	objAudio4.SetTituloLibro("Don Quijote de la Mancha")
 	objAudio4.SetAutor("Miguel de Cervantes")
 	objAudio4.SetNarrador("Juan Echanove")
@@ -79,4 +81,8 @@ func (this *MetadataAudiolibroRepository) BuscarAudiolibro(id int) (entity.MetaD
 	}
 
 	return entity.MetaDataAudiolibro{}, false
+}
+
+func (this *MetadataAudiolibroRepository) ListarAudiolibros() []entity.MetaDataAudiolibro {
+	return this.vectorMetadataAudiolibros
 }

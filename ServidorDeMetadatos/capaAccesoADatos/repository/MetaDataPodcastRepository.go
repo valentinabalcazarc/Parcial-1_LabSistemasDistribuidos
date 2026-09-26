@@ -20,9 +20,11 @@ func NewMetadataPodcastRepository() *MetadataPodcastRepository {
 func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	var objPod1, objPod2, objPod3, objPod4 entity.MetaDataPodcast
 
+	tipoPodcast := entity.NewTipoAudio(3, "Podcast")
+
 	// Podcast 1
 	objPod1.SetId(1)
-	objPod1.SetTipo("Podcast")
+	objPod1.SetTipo(tipoPodcast)
 	objPod1.SetNombre("Radio Ambulante")
 	objPod1.SetTituloEpisodio("El Polizón")
 	objPod1.SetNumeroTemporada(12)
@@ -31,7 +33,7 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 
 	// Podcast 2
 	objPod2.SetId(2)
-	objPod2.SetTipo("Podcast")
+	objPod2.SetTipo(tipoPodcast)
 	objPod2.SetNombre("The Daily")
 	objPod2.SetTituloEpisodio("Global Economy Trends")
 	objPod2.SetNumeroTemporada(8)
@@ -40,7 +42,7 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 
 	// Podcast 3
 	objPod3.SetId(3)
-	objPod3.SetTipo("Podcast")
+	objPod3.SetTipo(tipoPodcast)
 	objPod3.SetNombre("Entiende Tu Mente")
 	objPod3.SetTituloEpisodio("Gestionar la Ansiedad")
 	objPod3.SetNumeroTemporada(5)
@@ -49,7 +51,7 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 
 	// Podcast 4
 	objPod4.SetId(4)
-	objPod4.SetTipo("Podcast")
+	objPod4.SetTipo(tipoPodcast)
 	objPod4.SetNombre("La Pulla")
 	objPod4.SetTituloEpisodio("¿Qué pasa con la educación?")
 	objPod4.SetNumeroTemporada(6)
@@ -75,4 +77,8 @@ func (this *MetadataPodcastRepository) BuscarPodcast(id int) (entity.MetaDataPod
 	}
 
 	return entity.MetaDataPodcast{}, false
+}
+
+func (this *MetadataPodcastRepository) ListarPodcasts() []entity.MetaDataPodcast {
+	return this.vectorMetadataPodcasts
 }

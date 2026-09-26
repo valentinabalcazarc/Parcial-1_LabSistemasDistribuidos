@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MetaDataMusica struct {
 	id                int
-	tipo              string
+	tipo              TipoAudio
 	artistaPrincipal  string
 	album             string
 	genero            string
@@ -19,7 +19,7 @@ func (m *MetaDataMusica) GetId() int {
 	return m.id
 }
 
-func (m *MetaDataMusica) GetTipo() string {
+func (m *MetaDataMusica) GetTipo() TipoAudio {
 	return m.tipo
 }
 
@@ -53,7 +53,7 @@ func (m *MetaDataMusica) SetId(id int) {
 	m.id = id
 }
 
-func (m *MetaDataMusica) SetTipo(tipo string) {
+func (m *MetaDataMusica) SetTipo(tipo TipoAudio) {
 	m.tipo = tipo
 }
 
@@ -83,14 +83,14 @@ func (m *MetaDataMusica) SetAnioLanzamiento(anioLanzamiento string) {
 
 func (m MetaDataMusica) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		ID                int    `json:"id"`
-		Tipo              string `json:"tipo"`
-		ArtistaPrincipal  string `json:"artista_principal"`
-		Album             string `json:"album"`
-		Genero            string `json:"genero"`
-		TituloCancion     string `json:"titulo_cancion"`
-		SelloDiscografico string `json:"sello_discografico"`
-		AnioLanzamiento   string `json:"anio_lanzamiento"`
+		ID                int       `json:"id"`
+		Tipo              TipoAudio `json:"tipo"`
+		ArtistaPrincipal  string    `json:"artista_principal"`
+		Album             string    `json:"album"`
+		Genero            string    `json:"genero"`
+		TituloCancion     string    `json:"titulo_cancion"`
+		SelloDiscografico string    `json:"sello_discografico"`
+		AnioLanzamiento   string    `json:"anio_lanzamiento"`
 	}{
 		ID:                m.id,
 		Tipo:              m.tipo,
@@ -105,14 +105,14 @@ func (m MetaDataMusica) MarshalJSON() ([]byte, error) {
 
 func (m *MetaDataMusica) UnmarshalJSON(data []byte) error {
 	aux := struct {
-		ID                int    `json:"id"`
-		Tipo              string `json:"tipo"`
-		ArtistaPrincipal  string `json:"artista_principal"`
-		Album             string `json:"album"`
-		Genero            string `json:"genero_"`
-		TituloCancion     string `json:"titulo_cancion"`
-		SelloDiscografico string `json:"sello_discografico"`
-		AnioLanzamiento   string `json:"anio_lanzamiento"`
+		ID                int       `json:"id"`
+		Tipo              TipoAudio `json:"tipo"`
+		ArtistaPrincipal  string    `json:"artista_principal"`
+		Album             string    `json:"album"`
+		Genero            string    `json:"genero"`
+		TituloCancion     string    `json:"titulo_cancion"`
+		SelloDiscografico string    `json:"sello_discografico"`
+		AnioLanzamiento   string    `json:"anio_lanzamiento"`
 	}{}
 
 	if err := json.Unmarshal(data, &aux); err != nil {

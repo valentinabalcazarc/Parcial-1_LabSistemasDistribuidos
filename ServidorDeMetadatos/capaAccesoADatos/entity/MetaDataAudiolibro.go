@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MetaDataAudiolibro struct {
 	id          int
-	tipo        string
+	tipo        TipoAudio
 	tituloLibro string
 	autor       string
 	narrador    string
@@ -19,7 +19,7 @@ func (a *MetaDataAudiolibro) GetId() int {
 	return a.id
 }
 
-func (a *MetaDataAudiolibro) GetTipo() string {
+func (a *MetaDataAudiolibro) GetTipo() TipoAudio {
 	return a.tipo
 }
 
@@ -53,7 +53,7 @@ func (a *MetaDataAudiolibro) SetId(id int) {
 	a.id = id
 }
 
-func (a *MetaDataAudiolibro) SetTipo(tipo string) {
+func (a *MetaDataAudiolibro) SetTipo(tipo TipoAudio) {
 	a.tipo = tipo
 }
 
@@ -85,14 +85,14 @@ func (a *MetaDataAudiolibro) SetCapitulo(capitulo int) {
 
 func (a MetaDataAudiolibro) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		ID          int    `json:"id"`
-		Tipo        string `json:"tipo"`
-		TituloLibro string `json:"titulo_libro"`
-		Autor       string `json:"autor"`
-		Narrador    string `json:"narrador"`
-		Editorial   string `json:"editorial"`
-		ISBN        int    `json:"isbn"`
-		Capitulo    int    `json:"capitulo"`
+		ID          int       `json:"id"`
+		Tipo        TipoAudio `json:"tipo"`
+		TituloLibro string    `json:"titulo_libro"`
+		Autor       string    `json:"autor"`
+		Narrador    string    `json:"narrador"`
+		Editorial   string    `json:"editorial"`
+		ISBN        int       `json:"isbn"`
+		Capitulo    int       `json:"capitulo"`
 	}{
 		ID:          a.id,
 		Tipo:        a.tipo,
@@ -107,14 +107,14 @@ func (a MetaDataAudiolibro) MarshalJSON() ([]byte, error) {
 
 func (a *MetaDataAudiolibro) UnmarshalJSON(data []byte) error {
 	aux := struct {
-		ID          int    `json:"id"`
-		Tipo        string `json:"tipo"`
-		TituloLibro string `json:"titulo_libro"`
-		Autor       string `json:"autor"`
-		Narrador    string `json:"narrador"`
-		Editorial   string `json:"editorial"`
-		ISBN        int    `json:"isbn"`
-		Capitulo    int    `json:"capitulo"`
+		ID          int       `json:"id"`
+		Tipo        TipoAudio `json:"tipo"`
+		TituloLibro string    `json:"titulo_libro"`
+		Autor       string    `json:"autor"`
+		Narrador    string    `json:"narrador"`
+		Editorial   string    `json:"editorial"`
+		ISBN        int       `json:"isbn"`
+		Capitulo    int       `json:"capitulo"`
 	}{}
 
 	if err := json.Unmarshal(data, &aux); err != nil {

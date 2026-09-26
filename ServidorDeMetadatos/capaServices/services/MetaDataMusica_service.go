@@ -44,3 +44,28 @@ func (this *MetadataMusicaService) ConsultarMusica(id int) dto.RespuestaMetadata
 	}
 	return respuesta
 }
+
+func (this *MetadataMusicaService) ListarMusica() dto.RespuestaListaMusicaDTO {
+	lista := this.repository.ListarMusica()
+	var dtos []dto.MetadataMusicaDTO
+
+	for _, musica := range lista {
+		var d dto.MetadataMusicaDTO
+		d.ID = musica.GetId()
+		d.Tipo = musica.GetTipo()
+		d.ArtistaPrincipal = musica.GetArtistaPrincipal()
+		d.Album = musica.GetAlbum()
+		d.Genero = musica.GetGenero()
+		d.TituloCancion = musica.GetTituloCancion()
+		d.SelloDiscografico = musica.GetSelloDiscografico()
+		d.AnioLanzamiento = musica.GetAnioLanzamiento()
+
+		dtos = append(dtos, d)
+	}
+
+	return dto.RespuestaListaMusicaDTO{
+		Musica:  dtos,
+		Codigo:  200,
+		Mensaje: "Lista de música obtenida correctamente",
+	}
+}

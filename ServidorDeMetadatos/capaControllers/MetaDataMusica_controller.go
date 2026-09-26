@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	service "servidorMetadatos/capaServices"
+	service "servidorMetadatos/capaServices/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,5 +32,11 @@ func (this *MetadataMusicaController) ConsultarMusica(ctx *gin.Context) {
 	}
 
 	respuesta := this.service.ConsultarMusica(id)
+	ctx.JSON(respuesta.Codigo, respuesta)
+}
+
+// ListarMusica - GET /musicas
+func (this *MetadataMusicaController) ListarMusica(ctx *gin.Context) {
+	respuesta := this.service.ListarMusica()
 	ctx.JSON(respuesta.Codigo, respuesta)
 }

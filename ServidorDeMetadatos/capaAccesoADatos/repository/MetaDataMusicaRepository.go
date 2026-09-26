@@ -20,10 +20,11 @@ func NewMetadataMusicaRepository() *MetadataMusicaRepository {
 func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	var objMusica1, objMusica2, objMusica3, objMusica4 entity.MetaDataMusica
 
+	tipoMusica := entity.NewTipoAudio(1, "Música")
+
 	// Canción 1
 	objMusica1.SetId(1)
-	objMusica1.SetTipo("Música")
-	objMusica1.SetArtistaPrincipal("Bohemian Rhapsody")
+	objMusica1.SetTipo(tipoMusica)
 	objMusica1.SetArtistaPrincipal("Queen")
 	objMusica1.SetAlbum("A Night at the Opera")
 	objMusica1.SetGenero("Rock")
@@ -33,7 +34,7 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 
 	// Canción 2
 	objMusica2.SetId(2)
-	objMusica2.SetTipo("Música")
+	objMusica2.SetTipo(tipoMusica)
 	objMusica2.SetArtistaPrincipal("Michael Jackson")
 	objMusica2.SetAlbum("Thriller")
 	objMusica2.SetGenero("Pop")
@@ -43,7 +44,7 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 
 	// Canción 3
 	objMusica3.SetId(3)
-	objMusica3.SetTipo("Música")
+	objMusica3.SetTipo(tipoMusica)
 	objMusica3.SetArtistaPrincipal("Daft Punk")
 	objMusica3.SetAlbum("Random Access Memories")
 	objMusica3.SetGenero("Pop")
@@ -53,7 +54,7 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 
 	// Canción 4
 	objMusica4.SetId(4)
-	objMusica4.SetTipo("Música")
+	objMusica4.SetTipo(tipoMusica)
 	objMusica4.SetArtistaPrincipal("Coldplay")
 	objMusica4.SetAlbum("A Rush of Blood to the Head")
 	objMusica4.SetGenero("Jazz")
@@ -80,4 +81,8 @@ func (this *MetadataMusicaRepository) BuscarMusica(id int) (entity.MetaDataMusic
 	}
 
 	return entity.MetaDataMusica{}, false
+}
+
+func (this *MetadataMusicaRepository) ListarMusica() []entity.MetaDataMusica {
+	return this.vectorMetadataMusica
 }

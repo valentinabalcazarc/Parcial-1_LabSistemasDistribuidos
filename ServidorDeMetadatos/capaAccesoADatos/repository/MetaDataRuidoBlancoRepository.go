@@ -20,9 +20,11 @@ func NewMetadataRuidoBlancoRepository() *MetadataRuidoBlancoRepository {
 func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	var objRuido1, objRuido2, objRuido3, objRuido4 entity.MetaDataRuidoBlanco
 
+	tipoRuidoBlanco := entity.NewTipoAudio(2, "Ruido Blanco")
+
 	// Ruido 1: Ruido Blanco / Lluvia
 	objRuido1.SetId(1)
-	objRuido1.SetTipo("Ruido Blanco")
+	objRuido1.SetTipo(tipoRuidoBlanco)
 	objRuido1.SetTipoSonido("Ruido Blanco")
 	objRuido1.SetFuenteAudio("Lluvia")
 	objRuido1.SetUsoSugerido("Dormir")
@@ -32,7 +34,7 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 
 	// Ruido 2: Ruido Marrón / Ventilador
 	objRuido2.SetId(2)
-	objRuido2.SetTipo("Ruido Blanco")
+	objRuido2.SetTipo(tipoRuidoBlanco)
 	objRuido2.SetTipoSonido("Ruido Marrón")
 	objRuido2.SetFuenteAudio("Ventilador")
 	objRuido2.SetUsoSugerido("Concentración")
@@ -42,7 +44,7 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 
 	// Ruido 3: Ruido Rosa / Bosque
 	objRuido3.SetId(3)
-	objRuido3.SetTipo("Ruido Blanco")
+	objRuido3.SetTipo(tipoRuidoBlanco)
 	objRuido3.SetTipoSonido("Ruido Rosa")
 	objRuido3.SetFuenteAudio("Bosque")
 	objRuido3.SetUsoSugerido("Meditación")
@@ -52,7 +54,7 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 
 	// Ruido 4: Ruido Blanco / Cascada
 	objRuido4.SetId(4)
-	objRuido4.SetTipo("Ruido Blanco")
+	objRuido4.SetTipo(tipoRuidoBlanco)
 	objRuido4.SetTipoSonido("Ruido Blanco")
 	objRuido4.SetFuenteAudio("Cascada")
 	objRuido4.SetUsoSugerido("Concentración")
@@ -78,4 +80,8 @@ func (this *MetadataRuidoBlancoRepository) BuscarRuidoBlanco(id int) (entity.Met
 	}
 
 	return entity.MetaDataRuidoBlanco{}, false
+}
+
+func (this *MetadataRuidoBlancoRepository) ListarRuidoBlanco() []entity.MetaDataRuidoBlanco {
+	return this.vectorMetadataRuidoBlanco
 }

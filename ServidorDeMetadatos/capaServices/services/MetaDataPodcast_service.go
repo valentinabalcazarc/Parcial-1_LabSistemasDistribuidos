@@ -43,3 +43,27 @@ func (this *MetadataPodcastService) ConsultarPodcast(id int) dto.RespuestaMetada
 	}
 	return respuesta
 }
+
+func (this *MetadataPodcastService) ListarPodcasts() dto.RespuestaListaPodcastDTO {
+	lista := this.repository.ListarPodcasts()
+	var dtos []dto.MetadataPodcastDTO
+
+	for _, podcast := range lista {
+		var d dto.MetadataPodcastDTO
+		d.ID = podcast.GetId()
+		d.Tipo = podcast.GetTipo()
+		d.Nombre = podcast.GetNombre()
+		d.TituloEpisodio = podcast.GetTituloEpisodio()
+		d.NumeroTemporada = podcast.GetNumeroTemporada()
+		d.NotasShow = podcast.GetNotasShow()
+		d.ClasificacionContenido = podcast.GetClasificacionContenido()
+
+		dtos = append(dtos, d)
+	}
+
+	return dto.RespuestaListaPodcastDTO{
+		Podcasts: dtos,
+		Codigo:   200,
+		Mensaje:  "Lista de podcasts obtenida correctamente",
+	}
+}
