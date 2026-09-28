@@ -17,14 +17,6 @@ func NewAudioService() *AudioService {
 	}
 }
 
-// GuardarAudio guarda el archivo con el nombre indicado (ej: '1.mp3' o 'cancion.mp3')
-/*func (s *AudioService) GuardarAudio(nombreArchivo string, data []byte) error {
-	if nombreArchivo == "" {
-		return fmt.Errorf("el nombre del archivo no puede estar vacío")
-	}
-	return s.repo.GuardarAudio(nombreArchivo, data)
-}*/
-
 func (thisS *AudioService) GuardarAudio(objAudio dtos.AudioDTO, data []byte) error {
 	return thisS.repo.GuardarAudio(objAudio.NombreArchivo, data)
 }
