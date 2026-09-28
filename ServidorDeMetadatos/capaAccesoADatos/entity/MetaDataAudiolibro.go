@@ -2,6 +2,12 @@ package entity
 
 import "encoding/json"
 
+/**
+ * @brief Estructura que representa la metadata de un audiolibro.
+ * 
+ * Contiene información detallada sobre un audiolibro, incluyendo su
+ * título, autor, narrador, editorial, etc.
+ */
 type MetaDataAudiolibro struct {
 	id          int
 	tipo        TipoAudio

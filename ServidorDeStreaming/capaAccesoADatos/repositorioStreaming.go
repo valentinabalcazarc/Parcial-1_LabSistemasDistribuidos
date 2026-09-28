@@ -1,3 +1,7 @@
+/**
+ * @file repositorioStreaming.go
+ * @brief Capa de acceso a datos para el servidor de streaming.
+ */
 package capaaccesoadatos
 
 import (
@@ -7,6 +11,10 @@ import (
 	"sync"
 )
 
+/**
+ * @struct RepositorioStreaming
+ * @brief Estructura que representa el repositorio de acceso a archivos de streaming.
+ */
 type RepositorioStreaming struct{}
 
 var (
@@ -14,7 +22,10 @@ var (
 	once      sync.Once
 )
 
-// aplica singleton
+/**
+ * @brief Retorna la instancia única (Singleton) del repositorio de streaming.
+ * @return *RepositorioStreaming Puntero a la instancia del repositorio.
+ */
 func GetRepositorioStreaming() *RepositorioStreaming {
 	once.Do(func() {
 		instancia = &RepositorioStreaming{}
@@ -22,7 +33,12 @@ func GetRepositorioStreaming() *RepositorioStreaming {
 	return instancia
 }
 
-// AbrirArchivo abre el archivo físico .mp3 desde la carpeta 'audios' y lo retorna como *os.File
+/**
+ * @brief Abre el archivo físico .mp3 desde la carpeta 'audios'.
+ * @param nombreArchivo Nombre del archivo a abrir.
+ * @return *os.File Puntero al archivo abierto.
+ * @return error Error en caso de que no se pueda abrir el archivo.
+ */
 func (r *RepositorioStreaming) AbrirArchivo(nombreArchivo string) (*os.File, error) {
 	// Se busca en la carpeta audios del proyecto
 	ruta := filepath.Join("audios", nombreArchivo)

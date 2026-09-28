@@ -2,21 +2,29 @@ package repository
 
 import "servidorMetadatos/capaAccesoADatos/entity"
 
-// MetadataPodcastRepository es un repositorio que mantiene en memoria
-// el slice de podcasts y expone las operaciones de búsqueda y carga.
+/**
+ * @brief Repositorio que mantiene en memoria el slice de podcasts.
+ * 
+ * Expone las operaciones de búsqueda y carga de podcasts.
+ */
 type MetadataPodcastRepository struct {
 	vectorMetadataPodcasts []entity.MetaDataPodcast
 }
 
-// NewMetadataPodcastRepository crea el repositorio y lo precarga con la
-// metadata de episodios de podcast de ejemplo.
+/**
+ * @brief Crea el repositorio y lo precarga con episodios de podcast.
+ * 
+ * @return *MetadataPodcastRepository Instancia del repositorio.
+ */
 func NewMetadataPodcastRepository() *MetadataPodcastRepository {
 	this := &MetadataPodcastRepository{}
 	this.CargarMetadataPodcasts()
 	return this
 }
 
-// CargarMetadataPodcasts inicializa el vector con 2 episodios de ejemplo.
+/**
+ * @brief Inicializa el vector con 2 episodios de ejemplo.
+ */
 func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	var objPod1, objPod2 entity.MetaDataPodcast
 
@@ -47,8 +55,13 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	}
 }
 
-// BuscarPodcast recorre el vector buscando un podcast por su ID. Retorna el
-// podcast encontrado y un booleano que indica si la búsqueda tuvo éxito.
+/**
+ * @brief Busca un podcast por su ID.
+ * 
+ * @param id Identificador del podcast a buscar.
+ * @return entity.MetaDataPodcast Objeto encontrado.
+ * @return bool Indica si la búsqueda tuvo éxito.
+ */
 func (this *MetadataPodcastRepository) BuscarPodcast(id int) (entity.MetaDataPodcast, bool) {
 	for _, podcast := range this.vectorMetadataPodcasts {
 		if podcast.GetId() == id {
@@ -59,6 +72,11 @@ func (this *MetadataPodcastRepository) BuscarPodcast(id int) (entity.MetaDataPod
 	return entity.MetaDataPodcast{}, false
 }
 
+/**
+ * @brief Retorna todos los podcasts almacenados.
+ * 
+ * @return []entity.MetaDataPodcast Arreglo con los podcasts.
+ */
 func (this *MetadataPodcastRepository) ListarPodcasts() []entity.MetaDataPodcast {
 	return this.vectorMetadataPodcasts
 }

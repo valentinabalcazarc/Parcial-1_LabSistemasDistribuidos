@@ -9,16 +9,32 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// MetadataPodcastController expone los servicios REST de Podcast usando Gin.
+/**
+ * @brief Controlador para la metadata de Podcast.
+ * 
+ * Expone los servicios REST de Podcast usando Gin.
+ */
 type MetadataPodcastController struct {
 	service *service.MetadataPodcastService
 }
 
+/**
+ * @brief Constructor del controlador de MetadataPodcast.
+ * 
+ * @param service Servicio de MetadataPodcast que será inyectado.
+ * @return *MetadataPodcastController Nueva instancia del controlador.
+ */
 func NewMetadataPodcastController(service *service.MetadataPodcastService) *MetadataPodcastController {
 	return &MetadataPodcastController{service: service}
 }
 
-// ConsultarPodcast - GET /podcast/:id
+/**
+ * @brief Consulta un podcast por su ID.
+ * 
+ * Expone el endpoint GET /podcast/:id.
+ * 
+ * @param ctx Contexto de Gin que contiene la información de la petición HTTP.
+ */
 func (this *MetadataPodcastController) ConsultarPodcast(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 
@@ -35,7 +51,13 @@ func (this *MetadataPodcastController) ConsultarPodcast(ctx *gin.Context) {
 	ctx.JSON(respuesta.Codigo, respuesta)
 }
 
-// ListarPodcasts - GET /podcasts
+/**
+ * @brief Lista todos los podcasts disponibles.
+ * 
+ * Expone el endpoint GET /podcasts.
+ * 
+ * @param ctx Contexto de Gin que contiene la información de la petición HTTP.
+ */
 func (this *MetadataPodcastController) ListarPodcasts(ctx *gin.Context) {
 	respuesta := this.service.ListarPodcasts()
 	ctx.JSON(respuesta.Codigo, respuesta)

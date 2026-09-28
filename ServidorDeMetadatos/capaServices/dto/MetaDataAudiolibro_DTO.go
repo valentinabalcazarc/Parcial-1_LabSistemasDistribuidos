@@ -2,7 +2,11 @@ package dto
 
 import "servidorMetadatos/capaAccesoADatos/entity"
 
-// MetadataAudiolibroDTO es el objeto de transferencia de datos.
+/**
+ * @brief Objeto de Transferencia de Datos para Audiolibro.
+ * 
+ * Contiene los datos que son transferidos hacia o desde las capas externas.
+ */
 type MetadataAudiolibroDTO struct {
 	ID          int              `json:"id"`
 	Tipo        entity.TipoAudio `json:"tipo"`
@@ -14,12 +18,18 @@ type MetadataAudiolibroDTO struct {
 	Capitulo    int              `json:"capitulo"`
 }
 
+/**
+ * @brief DTO para la respuesta de una consulta de un solo audiolibro.
+ */
 type RespuestaMetadataAudiolibroDTO struct {
 	ObjAudiolibro MetadataAudiolibroDTO `json:"objAudiolibro"`
 	Codigo        int                   `json:"codigo"`
 	Mensaje       string                `json:"mensaje"`
 }
 
+/**
+ * @brief DTO para la respuesta de un listado de audiolibros.
+ */
 type RespuestaListaAudiolibroDTO struct {
 	Audiolibros []MetadataAudiolibroDTO `json:"audiolibros"`
 	Codigo      int                     `json:"codigo"`

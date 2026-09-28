@@ -9,16 +9,32 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// MetadataRuidoBlancoController expone los servicios REST de RuidoBlanco usando Gin.
+/**
+ * @brief Controlador para la metadata de RuidoBlanco.
+ * 
+ * Expone los servicios REST de RuidoBlanco usando Gin.
+ */
 type MetadataRuidoBlancoController struct {
 	service *service.MetadataRuidoBlancoService
 }
 
+/**
+ * @brief Constructor del controlador de MetadataRuidoBlanco.
+ * 
+ * @param service Servicio de MetadataRuidoBlanco que será inyectado.
+ * @return *MetadataRuidoBlancoController Nueva instancia del controlador.
+ */
 func NewMetadataRuidoBlancoController(service *service.MetadataRuidoBlancoService) *MetadataRuidoBlancoController {
 	return &MetadataRuidoBlancoController{service: service}
 }
 
-// ConsultarRuidoBlanco - GET /ruidoblanco/:id
+/**
+ * @brief Consulta un ruido blanco por su ID.
+ * 
+ * Expone el endpoint GET /ruidoblanco/:id.
+ * 
+ * @param ctx Contexto de Gin que contiene la información de la petición HTTP.
+ */
 func (this *MetadataRuidoBlancoController) ConsultarRuidoBlanco(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 
@@ -35,7 +51,13 @@ func (this *MetadataRuidoBlancoController) ConsultarRuidoBlanco(ctx *gin.Context
 	ctx.JSON(respuesta.Codigo, respuesta)
 }
 
-// ListarRuidoBlanco - GET /ruidosblancos
+/**
+ * @brief Lista todos los ruidos blancos disponibles.
+ * 
+ * Expone el endpoint GET /ruidosblancos.
+ * 
+ * @param ctx Contexto de Gin que contiene la información de la petición HTTP.
+ */
 func (this *MetadataRuidoBlancoController) ListarRuidoBlanco(ctx *gin.Context) {
 	respuesta := this.service.ListarRuidoBlanco()
 	ctx.JSON(respuesta.Codigo, respuesta)

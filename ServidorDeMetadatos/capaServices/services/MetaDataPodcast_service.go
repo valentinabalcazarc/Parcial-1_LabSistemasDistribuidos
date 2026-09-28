@@ -5,20 +5,35 @@ import (
 	"servidorMetadatos/capaServices/dto"
 )
 
-// MetadataAudiolibroService es la fachada (facade) que expone al controlador
-// las operaciones de negocio, ocultando el acceso al repositorio y la
-// conversión entre Entity y DTO.
+/**
+ * @brief Servicio para gestionar las operaciones de Podcast.
+ * 
+ * Es la fachada (facade) que expone al controlador las operaciones de negocio,
+ * ocultando el acceso al repositorio y la conversión entre Entity y DTO.
+ */
 type MetadataPodcastService struct {
 	repository *repository.MetadataPodcastRepository
 }
 
+/**
+ * @brief Crea una nueva instancia del servicio de MetadataPodcast.
+ * 
+ * @param repository Repositorio de MetadataPodcast inyectado.
+ * @return *MetadataPodcastService Instancia del servicio.
+ */
 func NewMetadataPodcastService(repository *repository.MetadataPodcastRepository) *MetadataPodcastService {
 	return &MetadataPodcastService{repository: repository}
 }
 
-// ConsultarPodcast recibe un título, busca el Entity en el repositorio y lo
-// convierte a RespuestaMetadataPodcastDTO con el código y mensaje según el
-// resultado de la búsqueda.
+/**
+ * @brief Consulta un podcast por su ID.
+ * 
+ * Recibe un ID, busca el Entity en el repositorio y lo convierte a
+ * RespuestaMetadataPodcastDTO con el código y mensaje según el resultado.
+ * 
+ * @param id Identificador del podcast a buscar.
+ * @return dto.RespuestaMetadataPodcastDTO DTO con la respuesta de la consulta.
+ */
 func (this *MetadataPodcastService) ConsultarPodcast(id int) dto.RespuestaMetadataPodcastDTO {
 	var respuesta dto.RespuestaMetadataPodcastDTO
 
@@ -44,6 +59,11 @@ func (this *MetadataPodcastService) ConsultarPodcast(id int) dto.RespuestaMetada
 	return respuesta
 }
 
+/**
+ * @brief Obtiene la lista de todos los podcasts.
+ * 
+ * @return dto.RespuestaListaPodcastDTO DTO con la lista y código de respuesta.
+ */
 func (this *MetadataPodcastService) ListarPodcasts() dto.RespuestaListaPodcastDTO {
 	lista := this.repository.ListarPodcasts()
 	var dtos []dto.MetadataPodcastDTO

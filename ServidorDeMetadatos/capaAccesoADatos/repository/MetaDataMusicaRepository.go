@@ -2,21 +2,29 @@ package repository
 
 import "servidorMetadatos/capaAccesoADatos/entity"
 
-// MetadataMusicaRepository es un repositorio que mantiene en memoria
-// el slice de música y expone las operaciones de búsqueda y carga.
+/**
+ * @brief Repositorio que mantiene en memoria el slice de música.
+ * 
+ * Expone las operaciones de búsqueda y carga para música.
+ */
 type MetadataMusicaRepository struct {
 	vectorMetadataMusica []entity.MetaDataMusica
 }
 
-// NewMetadataMusicaRepository crea el repositorio y lo precarga con la
-// metadata de canciones de ejemplo.
+/**
+ * @brief Crea el repositorio y lo precarga con metadata de canciones.
+ * 
+ * @return *MetadataMusicaRepository Instancia del repositorio.
+ */
 func NewMetadataMusicaRepository() *MetadataMusicaRepository {
 	this := &MetadataMusicaRepository{}
 	this.CargarMetadataMusica()
 	return this
 }
 
-// CargarMetadataMusica inicializa el vector con 2 canciones de ejemplo.
+/**
+ * @brief Inicializa el vector con 2 canciones de ejemplo.
+ */
 func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	var objMusica1, objMusica2 entity.MetaDataMusica
 
@@ -49,8 +57,13 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	}
 }
 
-// BuscarMusica recorre el vector buscando una canción por su ID. Retorna la
-// canción encontrada y un booleano que indica si la búsqueda tuvo éxito.
+/**
+ * @brief Busca una canción por su ID.
+ * 
+ * @param id Identificador de la música a buscar.
+ * @return entity.MetaDataMusica Objeto encontrado.
+ * @return bool Indica si la búsqueda tuvo éxito.
+ */
 func (this *MetadataMusicaRepository) BuscarMusica(id int) (entity.MetaDataMusica, bool) {
 	for _, musica := range this.vectorMetadataMusica {
 		if musica.GetId() == id {
@@ -61,6 +74,11 @@ func (this *MetadataMusicaRepository) BuscarMusica(id int) (entity.MetaDataMusic
 	return entity.MetaDataMusica{}, false
 }
 
+/**
+ * @brief Retorna toda la música almacenada.
+ * 
+ * @return []entity.MetaDataMusica Arreglo con la música.
+ */
 func (this *MetadataMusicaRepository) ListarMusica() []entity.MetaDataMusica {
 	return this.vectorMetadataMusica
 }

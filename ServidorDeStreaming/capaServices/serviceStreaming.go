@@ -1,3 +1,7 @@
+/**
+ * @file serviceStreaming.go
+ * @brief Lógica de negocio y servicios para el streaming de audio.
+ */
 package capaservices
 
 import (
@@ -12,11 +16,20 @@ import (
 	pb "servidorStreaming/serviciosAudio"
 )
 
+/**
+ * @struct StreamingService
+ * @brief Estructura que contiene las dependencias del servicio de streaming.
+ */
 type StreamingService struct {
 	repo         *capaAccesoDatos.RepositorioStreaming
 	conexionCola *componenteconexioncola.RabbitPublisher
 }
 
+/**
+ * @brief Crea una nueva instancia de StreamingService.
+ * @details Inicializa el repositorio y la conexión a la cola de RabbitMQ.
+ * @return *StreamingService Puntero a la nueva instancia del servicio.
+ */
 func NewStreamingService() *StreamingService {
 	fmt.Println("Inicializando service de streaming")
 	repo := capaAccesoDatos.GetRepositorioStreaming()
@@ -33,13 +46,25 @@ func NewStreamingService() *StreamingService {
 	}
 }
 
-// abrirArchivo actua como fachada para obtener el archivo de la cancion usando la capa de acceso a datos.
+/**
+ * @brief Actúa como fachada para obtener el archivo de la canción.
+ * @details Usa la capa de acceso a datos para abrir el archivo.
+ * @param titulo Nombre o título del archivo de audio a abrir.
+ * @return *os.File Puntero al archivo abierto.
+ * @return error Error si el archivo no se puede abrir.
+ */
 func abrirArchivo(titulo string) (*os.File, error) {
 	log.Printf("GetAudioFile llamado con titulo=%s", titulo)
 	return capaAccesoDatos.GetRepositorioStreaming().AbrirArchivo(titulo)
 }
 
-// EnviarFragmentosAudio lee el archivo de la canción en chunks y los envía al stream gRPC.
+/**
+ * @brief Lee el archivo de la canción en chunks (fragmentos) y los envía al stream gRPC.
+ * @details También notifica a RabbitMQ el inicio de la reproducción de la canción.
+ * @param titulo Nombre de la canción a reproducir.
+ * @param stream Stream gRPC por el cual se enviarán los fragmentos de audio.
+ * @return error Error en caso de falla durante la lectura o el envío.
+ */
 func EnviarFragmentosAudio(titulo string, stream pb.AudioService_AudioStreamServer) error {
 	log.Printf("Enviando fragmentos de audio para titulo=%s", titulo)
 	file, err := abrirArchivo(titulo)

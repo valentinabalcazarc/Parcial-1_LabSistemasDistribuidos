@@ -2,21 +2,29 @@ package repository
 
 import "servidorMetadatos/capaAccesoADatos/entity"
 
-// MetadataRuidoBlancoRepository es un repositorio que mantiene en memoria
-// el slice de ruido blanco y expone las operaciones de búsqueda y carga.
+/**
+ * @brief Repositorio que mantiene en memoria el slice de ruido blanco.
+ * 
+ * Expone las operaciones de búsqueda y carga de ruido blanco.
+ */
 type MetadataRuidoBlancoRepository struct {
 	vectorMetadataRuidoBlanco []entity.MetaDataRuidoBlanco
 }
 
-// NewMetadataRuidoBlancoRepository crea el repositorio y lo precarga con la
-// metadata de ruidos blancos de ejemplo.
+/**
+ * @brief Crea el repositorio y lo precarga con audios de ruido blanco.
+ * 
+ * @return *MetadataRuidoBlancoRepository Instancia del repositorio.
+ */
 func NewMetadataRuidoBlancoRepository() *MetadataRuidoBlancoRepository {
 	this := &MetadataRuidoBlancoRepository{}
 	this.CargarMetadataRuidoBlanco()
 	return this
 }
 
-// CargarMetadataRuidoBlanco inicializa el vector con 2 ruidos blancos de ejemplo.
+/**
+ * @brief Inicializa el vector con 2 ruidos blancos de ejemplo.
+ */
 func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	var objRuido1, objRuido2 entity.MetaDataRuidoBlanco
 
@@ -49,7 +57,13 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	}
 }
 
-// BuscarRuidoBlanco recorre el vector buscando un registro de ruido blanco por su ID.
+/**
+ * @brief Busca un registro de ruido blanco por su ID.
+ * 
+ * @param id Identificador del ruido blanco a buscar.
+ * @return entity.MetaDataRuidoBlanco Objeto encontrado.
+ * @return bool Indica si la búsqueda tuvo éxito.
+ */
 func (this *MetadataRuidoBlancoRepository) BuscarRuidoBlanco(id int) (entity.MetaDataRuidoBlanco, bool) {
 	for _, ruido := range this.vectorMetadataRuidoBlanco {
 		if ruido.GetId() == id {
@@ -60,6 +74,11 @@ func (this *MetadataRuidoBlancoRepository) BuscarRuidoBlanco(id int) (entity.Met
 	return entity.MetaDataRuidoBlanco{}, false
 }
 
+/**
+ * @brief Retorna todos los registros de ruido blanco almacenados.
+ * 
+ * @return []entity.MetaDataRuidoBlanco Arreglo con los ruidos blancos.
+ */
 func (this *MetadataRuidoBlancoRepository) ListarRuidoBlanco() []entity.MetaDataRuidoBlanco {
 	return this.vectorMetadataRuidoBlanco
 }

@@ -2,6 +2,12 @@ package entity
 
 import "encoding/json"
 
+/**
+ * @brief Estructura que representa la metadata de ruido blanco.
+ * 
+ * Almacena atributos específicos de un audio de ruido blanco,
+ * como el tipo de sonido, fuente, uso sugerido y duración.
+ */
 type MetaDataRuidoBlanco struct {
 	id                  int
 	tipo                TipoAudio

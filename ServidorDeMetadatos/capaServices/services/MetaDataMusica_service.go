@@ -5,20 +5,35 @@ import (
 	"servidorMetadatos/capaServices/dto"
 )
 
-// MetadataAudiolibroService es la fachada (facade) que expone al controlador
-// las operaciones de negocio, ocultando el acceso al repositorio y la
-// conversión entre Entity y DTO.
+/**
+ * @brief Servicio para gestionar las operaciones de Música.
+ * 
+ * Es la fachada (facade) que expone al controlador las operaciones de negocio,
+ * ocultando el acceso al repositorio y la conversión entre Entity y DTO.
+ */
 type MetadataMusicaService struct {
 	repository *repository.MetadataMusicaRepository
 }
 
+/**
+ * @brief Crea una nueva instancia del servicio de MetadataMusica.
+ * 
+ * @param repository Repositorio de MetadataMusica inyectado.
+ * @return *MetadataMusicaService Instancia del servicio.
+ */
 func NewMetadataMusicaService(repository *repository.MetadataMusicaRepository) *MetadataMusicaService {
 	return &MetadataMusicaService{repository: repository}
 }
 
-// ConsultarMusica recibe un título, busca el Entity en el repositorio y lo
-// convierte a RespuestaMetadataMusicaDTO con el código y mensaje según el
-// resultado de la búsqueda.
+/**
+ * @brief Consulta una música por su ID.
+ * 
+ * Recibe un ID, busca el Entity en el repositorio y lo convierte a
+ * RespuestaMetadataMusicaDTO con el código y mensaje según el resultado.
+ * 
+ * @param id Identificador de la música a buscar.
+ * @return dto.RespuestaMetadataMusicaDTO DTO con la respuesta de la consulta.
+ */
 func (this *MetadataMusicaService) ConsultarMusica(id int) dto.RespuestaMetadataMusicaDTO {
 	var respuesta dto.RespuestaMetadataMusicaDTO
 
@@ -45,6 +60,11 @@ func (this *MetadataMusicaService) ConsultarMusica(id int) dto.RespuestaMetadata
 	return respuesta
 }
 
+/**
+ * @brief Obtiene la lista de todas las músicas.
+ * 
+ * @return dto.RespuestaListaMusicaDTO DTO con la lista y código de respuesta.
+ */
 func (this *MetadataMusicaService) ListarMusica() dto.RespuestaListaMusicaDTO {
 	lista := this.repository.ListarMusica()
 	var dtos []dto.MetadataMusicaDTO

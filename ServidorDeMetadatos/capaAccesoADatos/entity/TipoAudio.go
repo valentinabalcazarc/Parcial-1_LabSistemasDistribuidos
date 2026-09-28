@@ -2,7 +2,12 @@ package entity
 
 import "encoding/json"
 
-// TipoAudio representa la entidad tipo de audio (id: int, nombre: string)
+/**
+ * @brief Entidad que representa un Tipo de Audio.
+ *
+ * Estructura fundamental para categorizar los diferentes tipos de audio
+ * en el sistema.
+ */
 type TipoAudio struct {
 	id     int
 	nombre string

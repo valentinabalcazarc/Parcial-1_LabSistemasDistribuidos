@@ -5,20 +5,35 @@ import (
 	"servidorMetadatos/capaServices/dto"
 )
 
-// MetadataAudiolibroService es la fachada (facade) que expone al controlador
-// las operaciones de negocio, ocultando el acceso al repositorio y la
-// conversión entre Entity y DTO.
+/**
+ * @brief Servicio para gestionar las operaciones de Ruido Blanco.
+ * 
+ * Es la fachada (facade) que expone al controlador las operaciones de negocio,
+ * ocultando el acceso al repositorio y la conversión entre Entity y DTO.
+ */
 type MetadataRuidoBlancoService struct {
 	repository *repository.MetadataRuidoBlancoRepository
 }
 
+/**
+ * @brief Crea una nueva instancia del servicio de MetadataRuidoBlanco.
+ * 
+ * @param repository Repositorio de MetadataRuidoBlanco inyectado.
+ * @return *MetadataRuidoBlancoService Instancia del servicio.
+ */
 func NewMetadataRuidoBlancoService(repository *repository.MetadataRuidoBlancoRepository) *MetadataRuidoBlancoService {
 	return &MetadataRuidoBlancoService{repository: repository}
 }
 
-// ConsultarRuidoBlanco recibe un título, busca el Entity en el repositorio y lo
-// convierte a RespuestaMetadataRuidoBlancoDTO con el código y mensaje según el
-// resultado de la búsqueda.
+/**
+ * @brief Consulta un ruido blanco por su ID.
+ * 
+ * Recibe un ID, busca el Entity en el repositorio y lo convierte a
+ * RespuestaMetadataRuidoBlancoDTO con el código y mensaje según el resultado.
+ * 
+ * @param id Identificador del ruido blanco a buscar.
+ * @return dto.RespuestaMetadataRuidoBlancoDTO DTO con la respuesta de la consulta.
+ */
 func (this *MetadataRuidoBlancoService) ConsultarRuidoBlanco(id int) dto.RespuestaMetadataRuidoBlancoDTO {
 	var respuesta dto.RespuestaMetadataRuidoBlancoDTO
 
@@ -45,6 +60,11 @@ func (this *MetadataRuidoBlancoService) ConsultarRuidoBlanco(id int) dto.Respues
 	return respuesta
 }
 
+/**
+ * @brief Obtiene la lista de todos los ruidos blancos.
+ * 
+ * @return dto.RespuestaListaRuidoBlancoDTO DTO con la lista y código de respuesta.
+ */
 func (this *MetadataRuidoBlancoService) ListarRuidoBlanco() dto.RespuestaListaRuidoBlancoDTO {
 	lista := this.repository.ListarRuidoBlanco()
 	var dtos []dto.MetadataRuidoBlancoDTO

@@ -5,20 +5,35 @@ import (
 	"servidorMetadatos/capaServices/dto"
 )
 
-// MetadataAudiolibroService es la fachada (facade) que expone al controlador
-// las operaciones de negocio, ocultando el acceso al repositorio y la
-// conversión entre Entity y DTO.
+/**
+ * @brief Servicio para gestionar las operaciones de Audiolibro.
+ * 
+ * Es la fachada (facade) que expone al controlador las operaciones de negocio,
+ * ocultando el acceso al repositorio y la conversión entre Entity y DTO.
+ */
 type MetadataAudiolibroService struct {
 	repository *repository.MetadataAudiolibroRepository
 }
 
+/**
+ * @brief Crea una nueva instancia del servicio de MetadataAudiolibro.
+ * 
+ * @param repository Repositorio de MetadataAudiolibro inyectado.
+ * @return *MetadataAudiolibroService Instancia del servicio.
+ */
 func NewMetadataAudiolibroService(repository *repository.MetadataAudiolibroRepository) *MetadataAudiolibroService {
 	return &MetadataAudiolibroService{repository: repository}
 }
 
-// ConsultarAudiolibro recibe un título, busca el Entity en el repositorio y lo
-// convierte a RespuestaMetadataAudiolibroDTO con el código y mensaje según el
-// resultado de la búsqueda.
+/**
+ * @brief Consulta un audiolibro por su ID.
+ * 
+ * Recibe un ID, busca el Entity en el repositorio y lo convierte a
+ * RespuestaMetadataAudiolibroDTO con el código y mensaje según el resultado.
+ * 
+ * @param id Identificador del audiolibro a buscar.
+ * @return dto.RespuestaMetadataAudiolibroDTO DTO con la respuesta de la consulta.
+ */
 func (this *MetadataAudiolibroService) ConsultarAudiolibro(id int) dto.RespuestaMetadataAudiolibroDTO {
 	var respuesta dto.RespuestaMetadataAudiolibroDTO
 
@@ -45,6 +60,11 @@ func (this *MetadataAudiolibroService) ConsultarAudiolibro(id int) dto.Respuesta
 	return respuesta
 }
 
+/**
+ * @brief Obtiene la lista de todos los audiolibros.
+ * 
+ * @return dto.RespuestaListaAudiolibroDTO DTO con la lista y código de respuesta.
+ */
 func (this *MetadataAudiolibroService) ListarAudiolibros() dto.RespuestaListaAudiolibroDTO {
 	lista := this.repository.ListarAudiolibros()
 	var dtos []dto.MetadataAudiolibroDTO

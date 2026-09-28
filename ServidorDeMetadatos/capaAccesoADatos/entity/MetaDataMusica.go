@@ -2,6 +2,12 @@ package entity
 
 import "encoding/json"
 
+/**
+ * @brief Estructura que representa la metadata de música.
+ * 
+ * Contiene información sobre una pista musical, como el artista,
+ * álbum, género, título de la canción, etc.
+ */
 type MetaDataMusica struct {
 	id                int
 	tipo              TipoAudio

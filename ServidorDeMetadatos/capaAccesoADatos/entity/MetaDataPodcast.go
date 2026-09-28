@@ -2,6 +2,12 @@ package entity
 
 import "encoding/json"
 
+/**
+ * @brief Estructura que representa la metadata de un podcast.
+ * 
+ * Contiene datos referentes a un episodio de podcast, incluyendo
+ * su nombre, título, temporada y notas del show.
+ */
 type MetaDataPodcast struct {
 	id                     int
 	tipo                   TipoAudio

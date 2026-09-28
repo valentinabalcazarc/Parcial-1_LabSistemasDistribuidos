@@ -2,21 +2,29 @@ package repository
 
 import "servidorMetadatos/capaAccesoADatos/entity"
 
-// MetadataAudioRepository es un repositorio que mantiene en memoria
-// el slice de audios y expone las operaciones de búsqueda y registro.
+/**
+ * @brief Repositorio que mantiene en memoria el slice de audiolibros.
+ * 
+ * Expone las operaciones de búsqueda y registro para los audiolibros.
+ */
 type MetadataAudiolibroRepository struct {
 	vectorMetadataAudiolibros []entity.MetaDataAudiolibro
 }
 
-// NewMetadataAudioRepository crea el repositorio y lo precarga con la
-// metadata de audios de ejemplo.
+/**
+ * @brief Crea el repositorio y lo precarga con audiolibros de ejemplo.
+ * 
+ * @return *MetadataAudiolibroRepository Instancia del repositorio.
+ */
 func NewMetadataAudiolibroRepository() *MetadataAudiolibroRepository {
 	this := &MetadataAudiolibroRepository{}
 	this.CargarMetadataAudiolibros()
 	return this
 }
 
-// CargarMetadataAudios inicializa el vector con 2 audios de ejemplo.
+/**
+ * @brief Inicializa el vector con 2 audiolibros de ejemplo.
+ */
 func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 	var objAudio1, objAudio2 entity.MetaDataAudiolibro
 
@@ -49,8 +57,13 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 	}
 }
 
-// BuscarAudio recorre el vector buscando un audio por su título. Retorna el
-// audio encontrado y un booleano que indica si la búsqueda tuvo éxito.
+/**
+ * @brief Busca un audiolibro por su ID.
+ * 
+ * @param id Identificador del audiolibro a buscar.
+ * @return entity.MetaDataAudiolibro Objeto encontrado.
+ * @return bool Indica si la búsqueda tuvo éxito.
+ */
 func (this *MetadataAudiolibroRepository) BuscarAudiolibro(id int) (entity.MetaDataAudiolibro, bool) {
 	for _, audio := range this.vectorMetadataAudiolibros {
 		if audio.GetId() == id {
@@ -61,6 +74,11 @@ func (this *MetadataAudiolibroRepository) BuscarAudiolibro(id int) (entity.MetaD
 	return entity.MetaDataAudiolibro{}, false
 }
 
+/**
+ * @brief Retorna todos los audiolibros almacenados.
+ * 
+ * @return []entity.MetaDataAudiolibro Arreglo con los audiolibros.
+ */
 func (this *MetadataAudiolibroRepository) ListarAudiolibros() []entity.MetaDataAudiolibro {
 	return this.vectorMetadataAudiolibros
 }

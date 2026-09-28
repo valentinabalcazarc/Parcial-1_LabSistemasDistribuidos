@@ -1,3 +1,7 @@
+/**
+ * @file rabbitmq_publisher.go
+ * @brief Componente para la conexión y publicación de mensajes en RabbitMQ.
+ */
 package componenteconexioncola
 
 import (
@@ -7,12 +11,20 @@ import (
 	"github.com/streadway/amqp"
 )
 
+/**
+ * @struct RabbitPublisher
+ * @brief Estructura que maneja la conexión, el canal y la cola de RabbitMQ.
+ */
 type RabbitPublisher struct {
 	conn    *amqp.Connection
 	channel *amqp.Channel
 	queue   amqp.Queue
 }
 
+/**
+ * @struct NotificacionReproduccion
+ * @brief Estructura que representa el mensaje de notificación de reproducción a enviar.
+ */
 type NotificacionReproduccion struct {
 	Titulo    string `json:"titulo"`
 	TipoAudio string `json:"tipo_audio,omitempty"`
@@ -20,6 +32,12 @@ type NotificacionReproduccion struct {
 	Mensaje   string `json:"mensaje"`
 }
 
+/**
+ * @brief Crea una nueva conexión y publicador de RabbitMQ.
+ * @details Configura la conexión, abre un canal y declara la cola "cola_estadisticas".
+ * @return *RabbitPublisher Puntero al publicador creado.
+ * @return error Error en caso de fallo en la conexión o configuración.
+ */
 func NewRabbitPublisher() (*RabbitPublisher, error) {
 	conn, err := amqp.Dial("amqp://admin:1234@192.168.80.25:5672/")
 	if err != nil {
@@ -51,6 +69,11 @@ func NewRabbitPublisher() (*RabbitPublisher, error) {
 	}, nil
 }
 
+/**
+ * @brief Publica una notificación de reproducción en la cola de RabbitMQ.
+ * @param msg Mensaje de notificación a publicar.
+ * @return error Error en caso de que falle la conversión a JSON o la publicación.
+ */
 func (p *RabbitPublisher) PublicarNotificacion(msg NotificacionReproduccion) error {
 	body, err := json.Marshal(msg)
 
@@ -77,6 +100,9 @@ func (p *RabbitPublisher) PublicarNotificacion(msg NotificacionReproduccion) err
 	return nil
 }
 
+/**
+ * @brief Cierra el canal y la conexión con RabbitMQ.
+ */
 func (p *RabbitPublisher) Cerrar() {
 	if p.channel != nil {
 		p.channel.Close()
