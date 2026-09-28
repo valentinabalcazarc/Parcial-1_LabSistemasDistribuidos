@@ -1,11 +1,12 @@
 module cliente
 
-go 1.25.0
+go 1.24.0
 
 require (
 	github.com/faiface/beep v1.1.0
 	google.golang.org/grpc v1.74.2
-	servidor.local/grpc-servidor v0.0.0
+	google.golang.org/protobuf v1.36.6
+	servidorStreaming v0.0.0
 )
 
 require (
@@ -19,7 +20,6 @@ require (
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.25.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250528174236-200df99c418a // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
 )
 
-replace servidorStreaming => ../servidorStreaming
+replace servidorStreaming => ../ServidorDeStreaming
