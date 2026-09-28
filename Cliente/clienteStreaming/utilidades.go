@@ -1,11 +1,9 @@
 package clientestreaming
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"log"
-	"os"
 	"time"
 
 	"github.com/faiface/beep"

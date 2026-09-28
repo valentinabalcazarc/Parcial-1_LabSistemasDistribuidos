@@ -16,9 +16,9 @@ func NewMetadataAudiolibroRepository() *MetadataAudiolibroRepository {
 	return this
 }
 
-// CargarMetadataAudios inicializa el vector con 5 audios de ejemplo.
+// CargarMetadataAudios inicializa el vector con 2 audios de ejemplo.
 func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
-	var objAudio1, objAudio2, objAudio3, objAudio4 entity.MetaDataAudiolibro
+	var objAudio1, objAudio2 entity.MetaDataAudiolibro
 
 	tipoAudiolibro := entity.NewTipoAudio(4, "Audiolibro")
 
@@ -42,32 +42,10 @@ func (this *MetadataAudiolibroRepository) CargarMetadataAudiolibros() {
 	objAudio2.SetISBN(978847888)
 	objAudio2.SetCapitulo(3)
 
-	// Audiolibro 3
-	objAudio3.SetId(3)
-	objAudio3.SetTipo(tipoAudiolibro)
-	objAudio3.SetTituloLibro("1984")
-	objAudio3.SetAutor("George Orwell")
-	objAudio3.SetNarrador("Raúl Llorens")
-	objAudio3.SetEditorial("Debolsillo")
-	objAudio3.SetISBN(978849989)
-	objAudio3.SetCapitulo(5)
-
-	// Audiolibro 4
-	objAudio4.SetId(4)
-	objAudio4.SetTipo(tipoAudiolibro)
-	objAudio4.SetTituloLibro("Don Quijote de la Mancha")
-	objAudio4.SetAutor("Miguel de Cervantes")
-	objAudio4.SetNarrador("Juan Echanove")
-	objAudio4.SetEditorial("Planeta")
-	objAudio4.SetISBN(978840806)
-	objAudio4.SetCapitulo(12)
-
 	// Asignación al slice del repositorio
 	this.vectorMetadataAudiolibros = []entity.MetaDataAudiolibro{
 		objAudio1,
 		objAudio2,
-		objAudio3,
-		objAudio4,
 	}
 }
 

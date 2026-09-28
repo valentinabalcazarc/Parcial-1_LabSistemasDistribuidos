@@ -12,7 +12,7 @@ func main() {
 	audioController := controller.NewAudioController(audioService)
 
 	// Registrar endpoints
-	http.HandleFunc("/canciones/upload", audioController.GuardarAudio)
+	http.HandleFunc("/audio/upload", audioController.GuardarAudio)
 	http.HandleFunc("/audio/obtener", audioController.ObtenerAudio)
 
 	fmt.Println("Servicio de almacenamiento escuchando en el puerto 8082...")

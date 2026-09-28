@@ -16,9 +16,9 @@ func NewMetadataRuidoBlancoRepository() *MetadataRuidoBlancoRepository {
 	return this
 }
 
-// CargarMetadataRuidoBlanco inicializa el vector con ruidos blancos según la especificación de la imagen.
+// CargarMetadataRuidoBlanco inicializa el vector con 2 ruidos blancos de ejemplo.
 func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
-	var objRuido1, objRuido2, objRuido3, objRuido4 entity.MetaDataRuidoBlanco
+	var objRuido1, objRuido2 entity.MetaDataRuidoBlanco
 
 	tipoRuidoBlanco := entity.NewTipoAudio(2, "Ruido Blanco")
 
@@ -42,32 +42,10 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	objRuido2.SetDuracion(120) // Duración del bucle en segundos (2 min)
 	objRuido2.SetFrecuenciaDominante("Graves")
 
-	// Ruido 3: Ruido Rosa / Bosque
-	objRuido3.SetId(3)
-	objRuido3.SetTipo(tipoRuidoBlanco)
-	objRuido3.SetTipoSonido("Ruido Rosa")
-	objRuido3.SetFuenteAudio("Bosque")
-	objRuido3.SetUsoSugerido("Meditación")
-	objRuido3.SetProveedor("Nature Audio Lab")
-	objRuido3.SetDuracion(180) // Duración del bucle en segundos (3 min)
-	objRuido3.SetFrecuenciaDominante("Graves")
-
-	// Ruido 4: Ruido Blanco / Cascada
-	objRuido4.SetId(4)
-	objRuido4.SetTipo(tipoRuidoBlanco)
-	objRuido4.SetTipoSonido("Ruido Blanco")
-	objRuido4.SetFuenteAudio("Cascada")
-	objRuido4.SetUsoSugerido("Concentración")
-	objRuido4.SetProveedor("Zen Loop Media")
-	objRuido4.SetDuracion(90) // Duración del bucle en segundos (1.5 min)
-	objRuido4.SetFrecuenciaDominante("Agudos")
-
 	// Asignación al slice del repositorio
 	this.vectorMetadataRuidoBlanco = []entity.MetaDataRuidoBlanco{
 		objRuido1,
 		objRuido2,
-		objRuido3,
-		objRuido4,
 	}
 }
 

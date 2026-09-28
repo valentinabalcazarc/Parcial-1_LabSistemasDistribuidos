@@ -16,9 +16,9 @@ func NewMetadataPodcastRepository() *MetadataPodcastRepository {
 	return this
 }
 
-// CargarMetadataPodcasts inicializa el vector con episodios de ejemplo.
+// CargarMetadataPodcasts inicializa el vector con 2 episodios de ejemplo.
 func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
-	var objPod1, objPod2, objPod3, objPod4 entity.MetaDataPodcast
+	var objPod1, objPod2 entity.MetaDataPodcast
 
 	tipoPodcast := entity.NewTipoAudio(3, "Podcast")
 
@@ -40,30 +40,10 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	objPod2.SetNotasShow("Análisis semanal de los mercados internacionales.")
 	objPod2.SetClasificacionContenido("Para toda la familia")
 
-	// Podcast 3
-	objPod3.SetId(3)
-	objPod3.SetTipo(tipoPodcast)
-	objPod3.SetNombre("Entiende Tu Mente")
-	objPod3.SetTituloEpisodio("Gestionar la Ansiedad")
-	objPod3.SetNumeroTemporada(5)
-	objPod3.SetNotasShow("Consejos prácticos de psicología para el día a día.")
-	objPod3.SetClasificacionContenido("Para toda la familia")
-
-	// Podcast 4
-	objPod4.SetId(4)
-	objPod4.SetTipo(tipoPodcast)
-	objPod4.SetNombre("La Pulla")
-	objPod4.SetTituloEpisodio("¿Qué pasa con la educación?")
-	objPod4.SetNumeroTemporada(6)
-	objPod4.SetNotasShow("Un análisis crítico de la situación educativa actual.")
-	objPod4.SetClasificacionContenido("Explicito")
-
 	// Asignación al slice del repositorio
 	this.vectorMetadataPodcasts = []entity.MetaDataPodcast{
 		objPod1,
 		objPod2,
-		objPod3,
-		objPod4,
 	}
 }
 

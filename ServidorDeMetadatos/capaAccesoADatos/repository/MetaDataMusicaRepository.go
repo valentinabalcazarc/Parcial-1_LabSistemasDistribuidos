@@ -16,9 +16,9 @@ func NewMetadataMusicaRepository() *MetadataMusicaRepository {
 	return this
 }
 
-// CargarMetadataMusica inicializa el vector con canciones de ejemplo.
+// CargarMetadataMusica inicializa el vector con 2 canciones de ejemplo.
 func (this *MetadataMusicaRepository) CargarMetadataMusica() {
-	var objMusica1, objMusica2, objMusica3, objMusica4 entity.MetaDataMusica
+	var objMusica1, objMusica2 entity.MetaDataMusica
 
 	tipoMusica := entity.NewTipoAudio(1, "Música")
 
@@ -42,32 +42,10 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	objMusica2.SetSelloDiscografico("Epic Records")
 	objMusica2.SetAnioLanzamiento("1982")
 
-	// Canción 3
-	objMusica3.SetId(3)
-	objMusica3.SetTipo(tipoMusica)
-	objMusica3.SetArtistaPrincipal("Daft Punk")
-	objMusica3.SetAlbum("Random Access Memories")
-	objMusica3.SetGenero("Pop")
-	objMusica3.SetTituloCancion("Get Lucky")
-	objMusica3.SetSelloDiscografico("Columbia Records")
-	objMusica3.SetAnioLanzamiento("2013")
-
-	// Canción 4
-	objMusica4.SetId(4)
-	objMusica4.SetTipo(tipoMusica)
-	objMusica4.SetArtistaPrincipal("Coldplay")
-	objMusica4.SetAlbum("A Rush of Blood to the Head")
-	objMusica4.SetGenero("Jazz")
-	objMusica4.SetTituloCancion("The Scientist")
-	objMusica4.SetSelloDiscografico("Parlophone")
-	objMusica4.SetAnioLanzamiento("2002")
-
 	// Asignación al slice del repositorio
 	this.vectorMetadataMusica = []entity.MetaDataMusica{
 		objMusica1,
 		objMusica2,
-		objMusica3,
-		objMusica4,
 	}
 }
 
