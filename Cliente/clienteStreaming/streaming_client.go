@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"os"
 	"time"
 
 	"google.golang.org/grpc"
@@ -16,7 +15,7 @@ import (
 
 const urlStreaming = "localhost:8083"
 
-func ReproducirAudio(filename string) {
+func ReproducirAudio(scanner *bufio.Scanner, filename string) {
 	fmt.Printf("\n📡 Conectando al Servidor de Streaming (%s)...\n", urlStreaming)
 
 	conn, err := grpc.Dial(urlStreaming, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -28,8 +27,10 @@ func ReproducirAudio(filename string) {
 
 	client := pb.NewAudioServiceClient(conn)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Minute)
-	defer cancel()
+	ctx, cancelTimeout := context.WithTimeout(context.Background(), 5*time.Minute)
+	ctx, cancelStream := context.WithCancel(ctx)
+	defer cancelTimeout()
+	defer cancelStream()
 
 	stream, err := client.AudioStream(ctx, &pb.AudioRequest{Filename: filename})
 	if err != nil {
@@ -40,18 +41,38 @@ func ReproducirAudio(filename string) {
 	reader, writer := io.Pipe()
 	stopChan := make(chan struct{})
 	doneChan := make(chan struct{})
+	enterPressedChan := make(chan struct{})
 
-	// Goroutine que escucha la tecla ENTER para detener la reproducción en cualquier momento
+	// Goroutine que escucha la tecla ENTER
 	go func() {
-		fmt.Printf("▶️  Reproduciendo %s en tiempo real vía gRPC...\n", filename)
-		fmt.Println("👉 Presione ENTER en cualquier momento para detener la reproducción y volver al menú.")
-		bufio.NewReader(os.Stdin).ReadString('\n')
-		close(stopChan)
+		if scanner.Scan() {
+			close(enterPressedChan)
+		}
 	}()
 
-	// Decodificar y reproducir sonido en el speaker
+	fmt.Printf("▶️  Reproduciendo %s en tiempo real vía gRPC...\n", filename)
+	fmt.Println("👉 Presione ENTER en cualquier momento para detener la reproducción y volver al menú.")
+
+	// Decodificar y reproducir sonido en goroutine
 	go DecodificarReproducir(reader, stopChan, doneChan)
 
-	// Recibir fragmentos de gRPC y escribirlos al reproductor
-	RecibirAudio(stream, writer, stopChan)
+	// Recibir fragmentos de gRPC en goroutine
+	go RecibirAudio(stream, writer, stopChan)
+
+	// Monitorear eventos: el usuario presiona ENTER o el audio termina
+	select {
+	case <-enterPressedChan:
+		// El usuario presionó ENTER durante la reproducción
+		close(stopChan)
+		cancelStream()
+		<-doneChan // Esperar a que la decodificación limpie el speaker
+		fmt.Println("\n⏹️ Reproducción detenida por el usuario.")
+
+	case <-doneChan:
+		// El audio terminó por sí solo (o por error)
+		close(stopChan)
+		cancelStream()
+		fmt.Println("\n✅ Audio finalizado. Presione ENTER para volver al menú...")
+		<-enterPressedChan // Esperar a que el usuario presione ENTER para liberar el scanner
+	}
 }

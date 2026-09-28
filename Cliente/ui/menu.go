@@ -154,7 +154,7 @@ func menuDetalleAudio(scanner *bufio.Scanner, tipo *clientemetadatos.TipoAudio, 
 		switch opcion {
 		case "1":
 			nombreArchivo := fmt.Sprintf("%d.mp3", idAudio)
-			clientestreaming.ReproducirAudio(nombreArchivo)
+			clientestreaming.ReproducirAudio(scanner, nombreArchivo)
 		case "2":
 			return
 		default:
