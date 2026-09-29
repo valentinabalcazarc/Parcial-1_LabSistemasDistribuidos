@@ -11,6 +11,12 @@ import (
 	clientestreaming "cliente/clienteStreaming"
 )
 
+/**
+ * @brief Inicia el menú principal de la aplicación.
+ * 
+ * Muestra las opciones principales al usuario y maneja
+ * la selección a través de un ciclo infinito hasta que el usuario decida salir.
+ */
 func IniciarMenu() {
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -39,6 +45,11 @@ func IniciarMenu() {
 	}
 }
 
+/**
+ * @brief Muestra el menú de tipos de audio.
+ * 
+ * @param scanner Escáner para leer la entrada del usuario.
+ */
 func menuTiposAudio(scanner *bufio.Scanner) {
 	tipos, err := clientemetadatos.ObtenerTiposAudio()
 	if err != nil {
@@ -87,6 +98,12 @@ func menuTiposAudio(scanner *bufio.Scanner) {
 	}
 }
 
+/**
+ * @brief Muestra la lista de audios disponibles para un tipo específico.
+ * 
+ * @param scanner Escáner para leer la entrada del usuario.
+ * @param tipo Puntero al tipo de audio seleccionado.
+ */
 func menuListaAudios(scanner *bufio.Scanner, tipo *clientemetadatos.TipoAudio) {
 	audios, err := clientemetadatos.ObtenerAudiosPorTipo(tipo.ID)
 	if err != nil {
@@ -128,6 +145,13 @@ func menuListaAudios(scanner *bufio.Scanner, tipo *clientemetadatos.TipoAudio) {
 	}
 }
 
+/**
+ * @brief Muestra los detalles de un audio específico y permite reproducirlo.
+ * 
+ * @param scanner Escáner para leer la entrada del usuario.
+ * @param tipo Puntero al tipo de audio seleccionado.
+ * @param idAudio Identificador único del audio.
+ */
 func menuDetalleAudio(scanner *bufio.Scanner, tipo *clientemetadatos.TipoAudio, idAudio int) {
 	detalles, err := clientemetadatos.ObtenerDetalleAudio(tipo.ID, idAudio)
 	if err != nil {

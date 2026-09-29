@@ -13,6 +13,13 @@ import (
 	pb "servidorStreaming/serviciosAudio"
 )
 
+/**
+ * @brief Decodifica un flujo MP3 y lo reproduce a través de la salida de audio.
+ * 
+ * @param reader Lector de donde provienen los datos MP3
+ * @param stopChan Canal para recibir la señal de detención manual de reproducción.
+ * @param doneChan Canal que se cierra al finalizar la decodificación de todo el stream.
+ */
 func DecodificarReproducir(reader io.Reader, stopChan chan struct{}, doneChan chan struct{}) {
 	defer close(doneChan)
 
@@ -37,6 +44,13 @@ func DecodificarReproducir(reader io.Reader, stopChan chan struct{}, doneChan ch
 	}
 }
 
+/**
+ * @brief Recibe los fragmentos de audio desde el stream gRPC y los escribe en un PipeWriter.
+ * 
+ * @param stream Cliente del stream de gRPC desde donde llegan los fragmentos de audio.
+ * @param writer Escritor del Pipe que envía los datos al decodificador.
+ * @param stopChan Canal para interrumpir la recepción en caso de cancelación por el usuario.
+ */
 func RecibirAudio(
 	stream pb.AudioService_AudioStreamClient,
 	writer *io.PipeWriter,

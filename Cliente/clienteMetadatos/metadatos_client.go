@@ -9,6 +9,13 @@ import (
 
 const urlMetadatos = "http://localhost:8081"
 
+/**
+ * @brief Obtiene la lista de tipos de audio disponibles.
+ * 
+ * Realiza una petición GET al servidor de metadatos.
+ * 
+ * @return Una lista de TipoAudio y un error si ocurre un fallo.
+ */
 func ObtenerTiposAudio() ([]TipoAudio, error) {
 	resp, err := http.Get(urlMetadatos + "/tipos-audio")
 	if err != nil {
@@ -24,6 +31,12 @@ func ObtenerTiposAudio() ([]TipoAudio, error) {
 	return data.Tipos, nil
 }
 
+/**
+ * @brief Obtiene los audios disponibles según el tipo de audio.
+ * 
+ * @param idTipo Identificador del tipo de audio.
+ * @return Una lista de ItemAudio y un error en caso de fallo.
+ */
 func ObtenerAudiosPorTipo(idTipo int) ([]ItemAudio, error) {
 	var endpoint string
 	switch idTipo {
@@ -60,6 +73,13 @@ func ObtenerAudiosPorTipo(idTipo int) ([]ItemAudio, error) {
 	return items, nil
 }
 
+/**
+ * @brief Obtiene los detalles específicos de un audio en formato JSON.
+ * 
+ * @param idTipo Identificador del tipo de audio.
+ * @param idAudio Identificador único del audio.
+ * @return Una cadena en formato JSON indentado con los detalles del audio y un error si falla.
+ */
 func ObtenerDetalleAudio(idTipo int, idAudio int) (string, error) {
 	var endpoint string
 	switch idTipo {

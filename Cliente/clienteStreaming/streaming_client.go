@@ -15,6 +15,15 @@ import (
 
 const urlStreaming = "localhost:8083"
 
+/**
+ * @brief Inicia la reproducción de audio mediante streaming gRPC.
+ * 
+ * Conecta con el servidor de streaming, solicita el audio y maneja
+ * la recepción y decodificación simultánea en goroutines separadas.
+ * 
+ * @param scanner Escáner para leer la entrada del usuario y permitir interrupción.
+ * @param filename Nombre del archivo a reproducir.
+ */
 func ReproducirAudio(scanner *bufio.Scanner, filename string) {
 	fmt.Printf("\n📡 Conectando al Servidor de Streaming (%s)...\n", urlStreaming)
 
