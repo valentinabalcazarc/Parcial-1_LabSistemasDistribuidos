@@ -31,7 +31,7 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	tipoPodcast := entity.NewTipoAudio(3, "Podcast")
 
 	// Podcast 1
-	objPod1.SetId(1)
+	objPod1.SetId(5)
 	objPod1.SetTipo(tipoPodcast)
 	objPod1.SetNombre("Radio Ambulante")
 	objPod1.SetTituloEpisodio("El Polizón")
@@ -40,7 +40,7 @@ func (this *MetadataPodcastRepository) CargarMetadataPodcasts() {
 	objPod1.SetClasificacionContenido("Explicito")
 
 	// Podcast 2
-	objPod2.SetId(2)
+	objPod2.SetId(6)
 	objPod2.SetTipo(tipoPodcast)
 	objPod2.SetNombre("The Daily")
 	objPod2.SetTituloEpisodio("Global Economy Trends")

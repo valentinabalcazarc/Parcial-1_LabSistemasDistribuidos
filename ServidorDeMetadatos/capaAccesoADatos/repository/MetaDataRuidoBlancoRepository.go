@@ -31,7 +31,7 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	tipoRuidoBlanco := entity.NewTipoAudio(2, "Ruido Blanco")
 
 	// Ruido 1: Ruido Blanco / Lluvia
-	objRuido1.SetId(1)
+	objRuido1.SetId(7)
 	objRuido1.SetTipo(tipoRuidoBlanco)
 	objRuido1.SetTipoSonido("Ruido Blanco")
 	objRuido1.SetFuenteAudio("Lluvia")
@@ -41,7 +41,7 @@ func (this *MetadataRuidoBlancoRepository) CargarMetadataRuidoBlanco() {
 	objRuido1.SetFrecuenciaDominante("Agudos")
 
 	// Ruido 2: Ruido Marrón / Ventilador
-	objRuido2.SetId(2)
+	objRuido2.SetId(8)
 	objRuido2.SetTipo(tipoRuidoBlanco)
 	objRuido2.SetTipoSonido("Ruido Marrón")
 	objRuido2.SetFuenteAudio("Ventilador")

@@ -31,7 +31,7 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	tipoMusica := entity.NewTipoAudio(1, "Música")
 
 	// Canción 1
-	objMusica1.SetId(1)
+	objMusica1.SetId(3)
 	objMusica1.SetTipo(tipoMusica)
 	objMusica1.SetArtistaPrincipal("Queen")
 	objMusica1.SetAlbum("A Night at the Opera")
@@ -41,7 +41,7 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	objMusica1.SetAnioLanzamiento("1975")
 
 	// Canción 2
-	objMusica2.SetId(2)
+	objMusica2.SetId(4)
 	objMusica2.SetTipo(tipoMusica)
 	objMusica2.SetArtistaPrincipal("Michael Jackson")
 	objMusica2.SetAlbum("Thriller")
