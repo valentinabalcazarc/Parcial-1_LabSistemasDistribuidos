@@ -1,3 +1,10 @@
+/**
+ * @file main.go
+ * @brief Punto de entrada principal para el Servidor de Estadísticas.
+ * 
+ * Este programa inicia la conexión con RabbitMQ y queda a la escucha
+ * de mensajes para procesar las estadísticas.
+ */
 package main
 
 import (
@@ -11,6 +18,12 @@ import (
 	consumer "servidorEstadisticas/componenteRecibirMensajes"
 )
 
+/**
+ * @brief Función principal que inicializa y arranca el servidor.
+ * 
+ * Configura el listener de RabbitMQ, el consumidor de mensajes y mantiene
+ * el proceso en ejecución hasta recibir una señal del sistema.
+ */
 func main() {
 	fmt.Println("Iniciando Servidor de Estadísticas...")
 

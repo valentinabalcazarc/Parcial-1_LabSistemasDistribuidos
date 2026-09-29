@@ -1,3 +1,7 @@
+/**
+ * @file message_consumer.go
+ * @brief Consumidor de mensajes para procesar notificaciones desde RabbitMQ.
+ */
 package componenterecibirmensajes
 
 import (
@@ -9,17 +13,34 @@ import (
 	listener "servidorEstadisticas/componenteListener"
 )
 
+/**
+ * @struct MessageConsumer
+ * @brief Estructura que gestiona el consumo de mensajes de RabbitMQ.
+ */
 type MessageConsumer struct {
-	rabbitListener *listener.RabbitListener
+	rabbitListener *listener.RabbitListener /**< @brief Referencia al listener de RabbitMQ para acceder al canal y cola. */
 }
 
+/**
+ * @brief Crea una nueva instancia de MessageConsumer.
+ * 
+ * @param rabbitListener Puntero al listener de RabbitMQ configurado.
+ * @return Un puntero a la instancia de MessageConsumer creada.
+ */
 func NewMessageConsumer(rabbitListener *listener.RabbitListener) *MessageConsumer {
 	return &MessageConsumer{
 		rabbitListener: rabbitListener,
 	}
 }
 
-// IniciarConsumo se suscribe a la cola y procesa las notificaciones de reproducción
+/**
+ * @brief Inicia el consumo de mensajes desde la cola de RabbitMQ.
+ * 
+ * Se suscribe a la cola "cola_estadisticas", procesa las notificaciones de reproducción
+ * en formato JSON y las imprime en la consola con un formato específico.
+ * 
+ * @return Un error si ocurre un problema al registrar el consumidor, o nil en caso de éxito.
+ */
 func (mc *MessageConsumer) IniciarConsumo() error {
 	ch := mc.rabbitListener.GetChannel()
 	queueName := mc.rabbitListener.GetQueueName()
