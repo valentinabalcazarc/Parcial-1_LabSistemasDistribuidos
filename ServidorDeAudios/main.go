@@ -1,3 +1,7 @@
+/**
+ * @file main.go
+ * @brief Punto de entrada principal para el Servidor de Audios.
+ */
 package main
 
 import (
@@ -7,6 +11,12 @@ import (
 	service "servidorAudios/capaServices/services"
 )
 
+/**
+ * @brief Función principal que inicializa el servidor web y los controladores.
+ * 
+ * Inicia el servicio de almacenamiento de audios configurando las rutas y escuchando
+ * en el puerto 8082.
+ */
 func main() {
 	audioService := service.NewAudioService()
 	audioController := controller.NewAudioController(audioService)

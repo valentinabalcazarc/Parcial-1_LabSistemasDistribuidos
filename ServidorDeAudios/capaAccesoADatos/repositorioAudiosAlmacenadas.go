@@ -1,3 +1,7 @@
+/**
+ * @file repositorioAudiosAlmacenadas.go
+ * @brief Definición del repositorio para almacenar y recuperar archivos de audio físicos.
+ */
 package capaaccesoadatos
 
 import (
@@ -7,6 +11,13 @@ import (
 	"sync"
 )
 
+/**
+ * @struct RepositorioAudios
+ * @brief Estructura que representa el repositorio de audios.
+ * 
+ * Gestiona el acceso concurrente al almacenamiento físico de los audios
+ * utilizando un Mutex para evitar condiciones de carrera.
+ */
 type RepositorioAudios struct {
 	mu sync.Mutex
 }
@@ -16,7 +27,13 @@ var (
 	once      sync.Once
 )
 
-// aplica singleton
+/**
+ * @brief Obtiene la instancia única del repositorio de audios (Patrón Singleton).
+ * 
+ * Garantiza que solo exista una instancia de RepositorioAudios en toda la aplicación.
+ * 
+ * @return *RepositorioAudios Puntero a la instancia única del repositorio.
+ */
 func GetRepositorioAudios() *RepositorioAudios {
 	once.Do(func() {
 		instancia = &RepositorioAudios{}
@@ -24,7 +41,16 @@ func GetRepositorioAudios() *RepositorioAudios {
 	return instancia
 }
 
-// GuardarAudio guarda el archivo físico .mp3 en la carpeta 'audios'
+/**
+ * @brief Guarda un archivo de audio físico en formato .mp3 en la carpeta 'audios'.
+ * 
+ * Crea el directorio 'audios' si este no existe y escribe los bytes proporcionados
+ * en un nuevo archivo dentro de este directorio.
+ * 
+ * @param nombreArchivo Nombre del archivo a guardar (incluyendo extensión, ej. 'audio.mp3').
+ * @param data Array de bytes que representa el contenido del archivo de audio.
+ * @return error Retorna un error si hubo problemas al crear el directorio o al escribir el archivo, nil en caso de éxito.
+ */
 func (r *RepositorioAudios) GuardarAudio(nombreArchivo string, data []byte) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -45,7 +71,13 @@ func (r *RepositorioAudios) GuardarAudio(nombreArchivo string, data []byte) erro
 	return nil
 }
 
-// ObtenerAudio lee y devuelve los bytes del archivo físico .mp3
+/**
+ * @brief Lee y devuelve el contenido de un archivo de audio físico desde la carpeta 'audios'.
+ * 
+ * @param nombreArchivo Nombre del archivo de audio a leer (incluyendo extensión).
+ * @return []byte Array de bytes con el contenido del archivo de audio.
+ * @return error Retorna un error si el archivo no pudo ser leído o encontrado, nil en caso de éxito.
+ */
 func (r *RepositorioAudios) ObtenerAudio(nombreArchivo string) ([]byte, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
