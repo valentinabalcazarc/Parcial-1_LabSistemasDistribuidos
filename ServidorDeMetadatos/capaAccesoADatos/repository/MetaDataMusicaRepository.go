@@ -33,12 +33,12 @@ func (this *MetadataMusicaRepository) CargarMetadataMusica() {
 	// Canción 1
 	objMusica1.SetId(3)
 	objMusica1.SetTipo(tipoMusica)
-	objMusica1.SetArtistaPrincipal("Queen")
-	objMusica1.SetAlbum("A Night at the Opera")
+	objMusica1.SetArtistaPrincipal("Jarabe de Palo")
+	objMusica1.SetAlbum("La Flaca")
 	objMusica1.SetGenero("Rock")
-	objMusica1.SetTituloCancion("Bohemian Rhapsody")
-	objMusica1.SetSelloDiscografico("EMI Records")
-	objMusica1.SetAnioLanzamiento("1975")
+	objMusica1.SetTituloCancion("La Flaca")
+	objMusica1.SetSelloDiscografico("Virgin Records")
+	objMusica1.SetAnioLanzamiento("1996")
 
 	// Canción 2
 	objMusica2.SetId(4)

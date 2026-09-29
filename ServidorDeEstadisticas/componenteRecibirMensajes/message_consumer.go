@@ -23,7 +23,7 @@ type MessageConsumer struct {
 
 /**
  * @brief Crea una nueva instancia de MessageConsumer.
- * 
+ *
  * @param rabbitListener Puntero al listener de RabbitMQ configurado.
  * @return Un puntero a la instancia de MessageConsumer creada.
  */
@@ -35,10 +35,10 @@ func NewMessageConsumer(rabbitListener *listener.RabbitListener) *MessageConsume
 
 /**
  * @brief Inicia el consumo de mensajes desde la cola de RabbitMQ.
- * 
+ *
  * Se suscribe a la cola "cola_estadisticas", procesa las notificaciones de reproducción
  * en formato JSON y las imprime en la consola con un formato específico.
- * 
+ *
  * @return Un error si ocurre un problema al registrar el consumidor, o nil en caso de éxito.
  */
 func (mc *MessageConsumer) IniciarConsumo() error {
@@ -58,7 +58,7 @@ func (mc *MessageConsumer) IniciarConsumo() error {
 		return fmt.Errorf("Error al registrar el consumidor: %v", err)
 	}
 
-	log.Println(" [*] Esperando mensajes de reproducción en 'cola_estadisticas'. Para salir presiona CTRL+C")
+	log.Println(" [*] Esperando mensajes de reproducción en 'cola_estadisticas'...")
 
 	go func() {
 		for d := range msgs {

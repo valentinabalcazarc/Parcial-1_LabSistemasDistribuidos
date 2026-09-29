@@ -22,10 +22,10 @@ type RabbitListener struct {
 
 /**
  * @brief Crea una nueva instancia de RabbitListener.
- * 
- * Establece la conexión con el servidor RabbitMQ, abre un canal y declara la cola 
+ *
+ * Establece la conexión con el servidor RabbitMQ, abre un canal y declara la cola
  * "cola_estadisticas".
- * 
+ *
  * @return Un puntero a RabbitListener o error en caso de fallo.
  */
 func NewRabbitListener() (*RabbitListener, error) {
@@ -54,6 +54,8 @@ func NewRabbitListener() (*RabbitListener, error) {
 		return nil, fmt.Errorf("Error declarando la cola: %v", err)
 	}
 
+	fmt.Printf("Conectado exitosamente a RabbitMQ\n")
+
 	return &RabbitListener{
 		conn:    conn,
 		channel: ch,
@@ -63,7 +65,7 @@ func NewRabbitListener() (*RabbitListener, error) {
 
 /**
  * @brief Obtiene el canal de comunicación actual.
- * 
+ *
  * @return El canal de RabbitMQ asociado al listener.
  */
 func (l *RabbitListener) GetChannel() *amqp.Channel {
@@ -72,7 +74,7 @@ func (l *RabbitListener) GetChannel() *amqp.Channel {
 
 /**
  * @brief Obtiene el nombre de la cola configurada.
- * 
+ *
  * @return El nombre de la cola en formato string.
  */
 func (l *RabbitListener) GetQueueName() string {
