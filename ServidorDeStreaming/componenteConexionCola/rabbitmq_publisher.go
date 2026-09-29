@@ -39,7 +39,8 @@ type NotificacionReproduccion struct {
  * @return error Error en caso de fallo en la conexión o configuración.
  */
 func NewRabbitPublisher() (*RabbitPublisher, error) {
-	conn, err := amqp.Dial("amqp://admin:1234@192.168.80.25:5672/")
+	//conn, err := amqp.Dial("amqp://admin:1234@192.168.80.25:5672/")
+	conn, err := amqp.Dial("amqp://admin:1234@172.20.10.2:5672/")
 	if err != nil {
 		return nil, fmt.Errorf("Error conectando a rabbitMQ: %v", err)
 	}
