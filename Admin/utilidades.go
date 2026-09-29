@@ -1,3 +1,10 @@
+/**
+ * @file utilidades.go
+ * @brief Funciones de utilidad para el cliente Admin.
+ *
+ * Contiene la lógica necesaria para leer archivos locales y enviarlos
+ * a través de peticiones HTTP en formato multipart/form-data hacia el servidor.
+ */
 package main
 
 import (
@@ -10,8 +17,18 @@ import (
 	"path/filepath"
 )
 
-// enviarAudioAlServidor empaqueta el archivo y el nombre en multipart/form-data
-// y realiza la petición HTTP POST al puerto 8082.
+/**
+ * @brief Empaqueta un archivo de audio y su identificador en multipart/form-data y realiza una petición POST al servidor.
+ *
+ * Esta función lee el archivo local, crea los campos requeridos ("Archivo" y "nombre_archivo")
+ * y los envía a la URL configurada del servidor.
+ *
+ * @param urlServidor   La URL completa del endpoint donde se subirá el archivo (ej. http://localhost:8082/audio/upload).
+ * @param rutaArchivo   La ruta absoluta o relativa del archivo de audio en el sistema de archivos local.
+ * @param nombreArchivo El ID o nombre que se le asignará al archivo en el servidor.
+ *
+ * @return error Retorna nil si la subida fue exitosa, o un error con detalles si algo falló.
+ */
 func enviarAudioAlServidor(urlServidor string, rutaArchivo string, nombreArchivo string) error {
 	// 1. Abrir el archivo MP3 desde la ruta ingresada
 	file, err := os.Open(rutaArchivo)

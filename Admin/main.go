@@ -1,3 +1,11 @@
+/**
+ * @file main.go
+ * @brief Punto de entrada principal de la aplicación Admin.
+ *
+ * Este archivo contiene la interfaz de consola para el rol de administrador,
+ * que permite capturar el ID de un audio y su ruta local para subirlo
+ * al servidor de audios.
+ */
 package main
 
 import (
@@ -7,6 +15,14 @@ import (
 	"strings"
 )
 
+/**
+ * @brief Función principal del programa.
+ *
+ * Inicia un menú interactivo en consola, solicitando al administrador
+ * un ID para el audio (añadiendo la extensión .mp3 si es necesario) 
+ * y la ruta local del archivo. Posteriormente invoca a la función 
+ * enviarAudioAlServidor para la transferencia.
+ */
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
